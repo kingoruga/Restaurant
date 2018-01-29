@@ -20,19 +20,21 @@ import org.springframework.web.servlet.ModelAndView;
 public class AreaManagementController 
 {
     @RequestMapping( value="remove.htm" ,method=RequestMethod.GET )
-    public ModelAndView removeArea( @RequestParam("zip") int zipCode )
+    public String removeArea( @RequestParam("zip") int zipCode )
     {
         Connector dataConnector = new Connector();
         dataConnector.removeZipFromServiceArea( zipCode );
-        return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
+        //return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
+        return "redirect:/manageAreas.htm";
     }
     
     @RequestMapping( value="add.htm" ,method=RequestMethod.GET )
-    public ModelAndView addArea( @RequestParam("zip") int zipCode )
+    public String addArea( @RequestParam("zip") int zipCode )
     {
         Connector dataConnector = new Connector();
         dataConnector.addZipToServiceArea( zipCode );
-        return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
+        //return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
+        return "redirect:/manageAreas.htm";
     }
     
     @RequestMapping( value={"/manageAreas.htm"} ,method=RequestMethod.GET )
@@ -90,7 +92,7 @@ public class AreaManagementController
     }
     
     @RequestMapping( value="/modifyAreaPackage.htm", method=RequestMethod.GET )
-    public ModelAndView modifyPackageArea( @RequestParam("zip") int zipCode , @RequestParam("item") String itemId , @RequestParam("command") String command )
+    public String modifyPackageArea( @RequestParam("zip") int zipCode , @RequestParam("item") String itemId , @RequestParam("command") String command )
     {
         Connector dataConnector = new Connector();
         
@@ -104,7 +106,8 @@ public class AreaManagementController
         }
         
         //otherwise do nothing and just return the page
-        return packagesInArea( zipCode );
+        //return packagesInArea( zipCode );
+        return "redirect:/area/manageAreaPackages.htm?zip=" + zipCode;
     }
     
     /*

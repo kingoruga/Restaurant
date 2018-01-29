@@ -2,8 +2,8 @@
 AreaRow = React.createClass({
    render: function()
    {
-       var removalUrl = "remove.htm?zip=" + this.props.area;
-       var packagesUrl = "manageAreaPackages.htm?zip=" + this.props.area;
+       var removalUrl = "area/remove.htm?zip=" + this.props.area;
+       var packagesUrl = "area/manageAreaPackages.htm?zip=" + this.props.area;
        return (
             <tr>
                 <td>{this.props.area}</td>
