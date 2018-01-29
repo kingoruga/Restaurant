@@ -34,7 +34,7 @@
         //change the following to test out whether the navbar changes correctly
         var testUser = {};
         testUser.email = "tester@email.com";
-        testUser.isAdmin = false;
+        testUser.isAdmin = true;
         var areaList= ${areaList};
         console.log( areaList );
 
