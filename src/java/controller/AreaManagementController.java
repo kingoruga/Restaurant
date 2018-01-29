@@ -107,7 +107,7 @@ public class AreaManagementController
         
         //otherwise do nothing and just return the page
         //return packagesInArea( zipCode );
-        return "redirect:/area/manageAreaPackages.htm?zip=" + zipCode;
+        return "redirect:/manageAreaPackages.htm?zip=" + zipCode;
     }
     
     /*

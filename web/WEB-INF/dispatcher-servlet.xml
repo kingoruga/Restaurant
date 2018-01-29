@@ -27,6 +27,7 @@
                 <prop key="login.htm">loginController</prop>
                 <prop key="manageOrders.htm">orderManageController</prop>
                 <prop key="/area/*">areaManageController</prop>
+                <prop key="manageAreaPackages.htm">areaManageController</prop>
                 <prop key="manageAreas.htm">areaManageController</prop>
             </props>
         </property>

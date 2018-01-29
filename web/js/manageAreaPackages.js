@@ -40,7 +40,7 @@ AreaItemForm = React.createClass({
     render: function()
     {
         return (
-        <form className="form" method="GET" action="modifyAreaPackage.htm">
+        <form className="form" method="GET" action="area/modifyAreaPackage.htm">
             <label>Package</label><br/>
             <select name="item" className="form-control">
                 {this.props.items.map( this.eachItem )}
