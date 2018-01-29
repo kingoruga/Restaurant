@@ -720,7 +720,25 @@ public class Connector {
         return availabilities;
     }
     
-    
+    //returns the number of orders made by the user who has the id given
+    //returns 0 if the user does not exist or any kind of exception was caught
+    public int countOrdersForUser( int userId )
+    {
+        PreparedStatement statement;
+        try 
+        {
+            statement = conn.prepareStatement( "select count(user_id) AS orderCount FROM ORDERS WHERE user_id=?");
+            statement.setInt(1, userId );
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getInt( "orderCount" );
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
     
    
 }
