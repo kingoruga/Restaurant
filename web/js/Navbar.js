@@ -10,9 +10,9 @@ NavBar = React.createClass({
     {
         return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
-            <a className="navbar-brand" href="index.html">Mummy's Restaurant</a>
-            <a className="nav-link text-light" href="viewMenu.html">View Menu</a>
-            <a className="nav-link text-light" href="myOrders.html">My Orders(0)</a>
+            <a className="navbar-brand" href="/index.htm">Mummy's Restaurant</a>
+            <a className="nav-link text-light" href="viewMenu.htm">View Menu</a>
+            <a className="nav-link text-light" href="myOrders.htm">My Orders(0)</a>
             <a className="nav-link text-light" href="manageUsers.html">Manage Users</a>
             <a className="nav-link text-light" href="manageAreas.html">Manage Areas</a>
             <a className="nav-link text-light" href="managePackages.html">Manage Packages</a>
@@ -25,9 +25,9 @@ NavBar = React.createClass({
     {
         return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
-            <a className="navbar-brand" href="index.html">Mummy's Restaurant</a>
-            <a className="nav-link text-light" href="viewMenu.html">View Menu</a>
-            <a className="nav-link text-light" href="myOrders.html">My Orders(0)</a>
+            <a className="navbar-brand" href="index.htm">Mummy's Restaurant</a>
+            <a className="nav-link text-light" href="viewMenu.htm">View Menu</a>
+            <a className="nav-link text-light" href="myOrders.htm">My Orders(0)</a>
             <a className="nav-link text-light" href="#">Logout</a>
         </nav>
         );
@@ -36,22 +36,25 @@ NavBar = React.createClass({
     {
         return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
-            <a className="navbar-brand" href="index.html">Mummy's Restaurant</a>
-            <a className="nav-link text-light" href="viewMenu.html">View Menu</a>
-            <a className="nav-link text-light" href="#">Login</a>
-            <a className="nav-link text-light" href="#">Register</a>
+            <a className="navbar-brand" href="index.htm">Mummy's Restaurant</a>
+            <a className="nav-link text-light" href="/viewMenu.htm">View Menu</a>
+            <a className="nav-link text-light" href="/login.htm">Login</a>
+            <a className="nav-link text-light" href="/register.htm">Register</a>
         </nav>
         );
     },
     render: function()
     {
+        if ( this.props.user == null )
+            return this.renderVisitorNav();
+
         //call a different function and return its return value depending
         //  on whether the user is logged in/is an admin/just a visitor
-        if ( this.props.user && this.props.user.isAdmin )
+        if ( this.props.user.email != null && this.props.user.isAdmin )
         {
             return this.renderAdminNav();
         }
-        else if ( this.props.user )
+        else if ( this.props.user.email != null )
         {
             return this.renderUserNav();
         }

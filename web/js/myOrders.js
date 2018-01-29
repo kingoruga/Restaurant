@@ -215,19 +215,25 @@ var Order = React.createClass({
 var OrderPage = React.createClass({
         
     render: function() {
+
+        var testUser = {email: "a@a"};
+
         return (
-            <div className='container'>
-                <div className="page-header">
-                    <h2>My orders</h2>
-                </div>
+            <div>
+                <NavBar user={testUser} />
+                <div className='container'>
+                    <div className="page-header">
+                        <h2>My orders</h2>
+                    </div>
 
-                <p>Manage all your ongoing orders. You currently have <b>3</b> ongoing order/s.</p>
-                <hr />
+                    <p>Manage all your ongoing orders. You currently have <b>3</b> ongoing order/s.</p>
+                    <hr />
 
-                <div className="container-fluid">
-                    <Order />
-                    <Order />
-                    <Order />
+                    <div className="container-fluid">
+                        <Order />
+                        <Order />
+                        <Order />
+                    </div>
                 </div>
             </div>
         )
