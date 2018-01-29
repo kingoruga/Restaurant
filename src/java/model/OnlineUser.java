@@ -19,6 +19,11 @@ public class OnlineUser {
     private boolean IsAdmin;
     private boolean IsBanned;
     private Address address;
+    
+    public OnlineUser()
+    {
+        //default constructor for bean,do nothing
+    }
 
     public OnlineUser(int id, String fname, String lname, String isAdmin, String email, int addressId, String status){
         this.UserId = id;
@@ -99,5 +104,47 @@ public class OnlineUser {
         this.AddressId = AddressId;
     }
 
+    /*
+    private int UserId;
+    private String FirstName;
+    private String LastName;
+    private String Email;
+    private String Password;
+    private int AddressId;
+    private boolean IsAdmin;
+    private boolean IsBanned;
+    private Address address;
+    */
+    @Override
+    public String toString()
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "{" );
+        toReturn.append( Orders.surroundWithQuotes( "userid" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( Integer.toString( UserId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "name" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( FirstName + " " + LastName ) );
+        
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "email" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( Email ) );
 
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "admin" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( IsAdmin + "" ) );
+
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "banned" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( IsBanned + "" ) );
+        
+        toReturn.append( "}" );
+        return toReturn.toString();
+    }
 }

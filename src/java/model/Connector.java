@@ -237,11 +237,11 @@ public class Connector {
     public List getFoodItemsInArea(int zip){
         List<String> foodInArea = new ArrayList();
         try{
-            PreparedStatement pstmt = conn.prepareStatement("select fi.food_item_id,name || ' - ' || description as Food_Item from food_item fi join availability a on fi.food_item_id = a.food_item_id join service_areas se on a.zip_code = se.zip_code where se.zip_code = ?");
+            PreparedStatement pstmt = conn.prepareStatement("select fi.name from food_item fi join availability a on fi.food_item_id = a.food_item_id join service_areas se on a.zip_code = se.zip_code where se.zip_code = ?");
             pstmt.setInt(1, zip);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
-                foodInArea.add(rs.getString(1)+" "+rs.getString(2));
+                foodInArea.add(rs.getString(1) );
             }
         }catch(SQLException ex){
             System.out.println("Unable to get food in " + zip);
@@ -516,6 +516,7 @@ public class Connector {
            if (count == 1)
                return true;
        }catch(SQLException ex){
+           System.err.println( ex.getMessage() );
            return false;
        }
        return false;

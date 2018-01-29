@@ -129,9 +129,54 @@ public class Orders {
         return this.orderAddress;
     }
 
+    public static String surroundWithQuotes( String toSurround )
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "\"" );
+        toReturn.append( toSurround );
+        toReturn.append( "\"" );
+        return toReturn.toString();
+    }
+    
     @Override
     public String toString()
     {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "{" );
+        toReturn.append( surroundWithQuotes( "orderid" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Integer.toString(OrderId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "payment" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( PaymentMethod ) );
+        
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "price" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Float.toString( Price ) ) );
+        
+        if ( orderAddress != null )
+        {
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "address" ) );
+            toReturn.append( ":" );
+            toReturn.append( orderAddress.toString() );
+        }
+        
+        if ( user != null )
+        {
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "user" ) );
+            toReturn.append( ":" );
+            toReturn.append( user.toString() );
+        }
+        
+        toReturn.append( "}" );
+        return toReturn.toString();
+        /*
         StringBuilder toReturn = new StringBuilder();
         toReturn.append( Integer.toString(OrderId) );
         toReturn.append( "\t" );
@@ -168,6 +213,7 @@ public class Orders {
             toReturn.append( "\t" );
         }
         return toReturn.toString();
+        */
     }
 
 }
