@@ -22,11 +22,11 @@
                 <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
-                <prop key="manageAreas.htm">manageAreasController</prop>
-                <prop key="manageOrders.htm">manageOrdersController</prop>
                 <prop key="manageUsers.htm">manageUsersController</prop>
                 <prop key="registration.htm">registrationController</prop>
                 <prop key="login.htm">loginController</prop>
+                <prop key="manageOrders.htm">orderManageController</prop>
+                <prop key="/area/*">areaManageController</prop>
             </props>
         </property>
     </bean>
@@ -54,14 +54,15 @@
     <bean name="loginController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
             p:viewName="login" />
-    <bean name="manageOrdersController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="manageOrders" />
-    <bean name="manageAreasController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="manageAreas" />
+
     <bean name="manageUsersController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
             p:viewName="manageUsers" />
+    
+    <bean name="orderManageController"
+      class="controller.OrderController" />
+    
+    <bean name="areaManageController"
+      class="controller.AreaManagementController" />
     
 </beans>
