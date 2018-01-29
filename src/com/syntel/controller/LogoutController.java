@@ -17,7 +17,7 @@ public class LogoutController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         HttpSession session = hsr.getSession();
-        session.setAttribute("user", "");
+        session.setAttribute("user", null);
         return new ModelAndView(new RedirectView("/"));
     }
     

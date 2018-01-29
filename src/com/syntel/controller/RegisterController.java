@@ -19,7 +19,7 @@ public class RegisterController extends SimpleFormController {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("../applicationContext.xml");
         dao = ctx.getBean("OnlineUserDAO", OnlineUserDAO.class);
         setCommandClass(OnlineUser.class);
-        setCommandName("user");
+        setCommandName("userModel");
     }
 
     @Override
