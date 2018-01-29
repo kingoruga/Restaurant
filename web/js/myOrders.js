@@ -216,11 +216,9 @@ var OrderPage = React.createClass({
         
     render: function() {
 
-        var testUser = {email: "a@a"};
-
         return (
             <div>
-                <NavBar user={testUser} />
+                <NavBar user={user} />
                 <div className='container'>
                     <div className="page-header">
                         <h2>My orders</h2>

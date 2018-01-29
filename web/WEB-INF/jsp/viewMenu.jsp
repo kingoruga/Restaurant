@@ -37,11 +37,8 @@
         crossorigin="anonymous"></script>
 <script src="js/Navbar.js" type="text/babel"></script>
 <script type="text/babel">
-    //change the following to test out whether the navbar changes correctly
-    var testUser = {};
-    //testUser.email = "tester@email.com";
-    //testUser.isAdmin = true;
-    React.render(<NavBar user={testUser}/>, document.getElementById("mainContainer"));
+    var user = eval(${user});
+    React.render(<NavBar user={user}/>, document.getElementById("mainContainer"));
 </script>
 </body>
 </html>

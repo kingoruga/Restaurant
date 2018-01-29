@@ -3,7 +3,6 @@
     Created on : Jan 25, 2018, 2:55:22 PM
     Author     : syntel
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>

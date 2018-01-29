@@ -24,7 +24,7 @@ public class OnlineUserRowMapper implements RowMapper {
         user.setUserId(rs.getInt(1));
         user.setFirstName(rs.getString(2));
         user.setLastName(rs.getString(3));
-        user.setIsAdmin(rs.getString(4) != null ? rs.equals("0") : false);
+        user.setIsAdmin(rs.getString(4) != null ? rs.getString(4).equalsIgnoreCase("yes") : false);
         user.setPassword(rs.getString(5));
         user.setEmail(rs.getString(6));
         user.setAddressId(rs.getInt(7));

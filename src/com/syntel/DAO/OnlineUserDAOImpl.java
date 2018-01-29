@@ -39,9 +39,9 @@ public class OnlineUserDAOImpl implements OnlineUserDAO {
         
         // Then insert the user into the database
         p_query = "insert into "
-                + "online_user (first_name, last_name, password, email, address_id, status) "
+                + "online_user (first_name, last_name, is_admin, password, email, address_id, status) "
                 + "values (?,?,?,?,?,?)";
-        Object[] secondParams = { user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), key, user.isIsBanned() ? "Disabled" : "Enabled" };
+        Object[] secondParams = { user.getFirstName(), user.getLastName(), "no", user.getPassword(), user.getEmail(), key, user.isIsBanned() ? "Disabled" : "Enabled" };
         jdbcTemplate.update(p_query, secondParams);
         
         return true;

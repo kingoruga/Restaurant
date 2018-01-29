@@ -31,9 +31,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="js/Navbar.js" type="text/babel" ></script>
         <script type="text/babel">
-        React.render(
+            var user = eval(${user});
+            React.render(
                 <div>
-                    <NavBar />
+                    <NavBar user={user} />
                 </div>
             , document.getElementById( "mainContainer" )
         );

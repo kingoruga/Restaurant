@@ -17,7 +17,7 @@ NavBar = React.createClass({
             <a className="nav-link text-light" href="manageAreas.html">Manage Areas</a>
             <a className="nav-link text-light" href="managePackages.html">Manage Packages</a>
             <a className="nav-link text-light" href="manageOrders.html">Manage Orders</a>
-            <a className="nav-link text-light" href="#">Logout</a>
+            <a className="nav-link text-light" href="/logout.htm">Logout</a>
         </nav>
         );
     },
@@ -26,9 +26,9 @@ NavBar = React.createClass({
         return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
             <a className="navbar-brand" href="index.htm">Mummy's Restaurant</a>
-            <a className="nav-link text-light" href="viewMenu.htm">View Menu</a>
-            <a className="nav-link text-light" href="myOrders.htm">My Orders(0)</a>
-            <a className="nav-link text-light" href="#">Logout</a>
+            <a className="nav-link text-light" href="/viewMenu.htm">View Menu</a>
+            <a className="nav-link text-light" href="/myOrders.htm">My Orders(0)</a>
+            <a className="nav-link text-light" href="/logout.htm">Logout</a>
         </nav>
         );
     },
@@ -50,10 +50,11 @@ NavBar = React.createClass({
 
         //call a different function and return its return value depending
         //  on whether the user is logged in/is an admin/just a visitor
-        if ( this.props.user.email != null && this.props.user.isAdmin )
+        if ( this.props.user.email != null && this.props.user.isAdmin === "true" )
         {
             return this.renderAdminNav();
         }
+        
         else if ( this.props.user.email != null )
         {
             return this.renderUserNav();

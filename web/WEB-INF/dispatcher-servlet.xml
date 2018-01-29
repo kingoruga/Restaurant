@@ -21,6 +21,7 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="login.htm">loginController</prop>
+                <prop key="logout.htm">logoutController</prop>
                 <prop key="register.htm">registerController</prop>
                 <prop key="viewMenu.htm">viewMenuController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
@@ -42,6 +43,9 @@
 
     <bean name="loginController"
           class="com.syntel.controller.LoginController" />
+    
+    <bean name="logoutController"
+          class="com.syntel.controller.LogoutController" />
 
     <bean name="registerController"
           class="com.syntel.controller.RegisterController" />

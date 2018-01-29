@@ -9,8 +9,9 @@ import com.syntel.DAO.OnlineUserDAO;
 import com.syntel.domain.OnlineUser;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.net.CookieHandler;
-import java.net.CookieManager;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginController extends SimpleFormController {
 
@@ -24,15 +25,16 @@ public class LoginController extends SimpleFormController {
     }
 
     @Override
-    protected ModelAndView onSubmit(Object command) throws Exception{
-        OnlineUser user=(OnlineUser)command;
+    public ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, org.springframework.validation.BindException errors) throws Exception{
+        OnlineUser user= (OnlineUser) command;
         OnlineUser returnedUser = dao.getUser(user.getEmail(), user.getPassword());
 
-        // CookieManager cm = new CookieManager();
-        // CookieHandler.setDefault(cm);
-
-        if (returnedUser != null)
+        if (returnedUser != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", returnedUser);
             return new ModelAndView("userSuccess", "user", returnedUser);
+        }
+        
         else
             return new ModelAndView(new RedirectView("/"));
             //return new ModelAndView("userFailure");

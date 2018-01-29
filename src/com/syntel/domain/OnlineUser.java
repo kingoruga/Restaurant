@@ -1,10 +1,13 @@
 package com.syntel.domain;
 
+import static com.syntel.domain.Orders.surroundWithQuotes;
+import java.io.Serializable;
+
 /**
  *
  * @author syntel
  */
-public class OnlineUser {
+public class OnlineUser implements Serializable {
     private int UserId;
     private String firstName;
     private String lastName;
@@ -90,5 +93,50 @@ public class OnlineUser {
     public void setAddress(Address address) {
         this.address = address;
     }
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "{" );
+        toReturn.append( surroundWithQuotes( "userId" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Integer.toString(UserId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "firstName" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( firstName ) );
+                
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "lastName" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( lastName ) );
+                
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "email" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( email ) );
+        
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "isAdmin" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Boolean.toString(IsAdmin) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "isDisabled" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Boolean.toString(IsBanned) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "address" ) );
+        toReturn.append( ":" );
+        toReturn.append( address.toString() );
+        toReturn.append( "}" );
+        return toReturn.toString();
+    }
+    
 
 }

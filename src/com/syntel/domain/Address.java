@@ -1,6 +1,9 @@
 package com.syntel.domain;
 
-public class Address {
+import static com.syntel.domain.Orders.surroundWithQuotes;
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
     private int addressId;
     private String street1;
@@ -60,6 +63,37 @@ public class Address {
 
     public boolean isIsDeliverable() {
         return isDeliverable;
+    }
+    
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "{" );
+        toReturn.append( surroundWithQuotes( "addressId" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Integer.toString(addressId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "city" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( city ) );
+        
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "state" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( state ) );
+        
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "zip" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( zip ) );
+        
+        toReturn.append( "}" );
+        return toReturn.toString();
     }
 
     public void setIsDeliverable(boolean isDeliverable) {
