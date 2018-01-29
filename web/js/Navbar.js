@@ -1,5 +1,4 @@
 /*
- * TODO: need to pull this out into it's own js file
  * NavBar class
  * Properties:
  * user,object containing information on the currently logged in user
@@ -12,7 +11,7 @@ NavBar = React.createClass({
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
             <a className="navbar-brand" href="index.htm">Mummy's Restaurant</a>
             <a className="nav-link text-light" href="menuView.htm">View Menu</a>
-            <a className="nav-link text-light" href="myOrders.htm">My Orders(0)</a>
+            <a className="nav-link text-light" href="myOrders.htm">My Orders({this.props.user.orderCount})</a>
             <a className="nav-link text-light" href="manageUsers.htm">Manage Users</a>
             <a className="nav-link text-light" href="manageAreas.htm">Manage Areas</a>
             <a className="nav-link text-light" href="managePackages.htm">Manage Packages</a>
@@ -27,7 +26,7 @@ NavBar = React.createClass({
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
             <a className="navbar-brand" href="index.htm">Mummy's Restaurant</a>
             <a className="nav-link text-light" href="menuView.htm">View Menu</a>
-            <a className="nav-link text-light" href="myOrders.htm">My Orders(0)</a>
+            <a className="nav-link text-light" href="myOrders.htm">My Orders({this.props.user.orderCount})</a>
             <a className="nav-link text-light" href="#">Logout</a>
         </nav>
         );
