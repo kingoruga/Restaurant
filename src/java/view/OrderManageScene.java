@@ -5,9 +5,7 @@
  */
 package view;
 
-import controller.OrderController;
 import java.util.ArrayList;
-import java.util.List;
 import model.Orders;
 
 /**
@@ -16,10 +14,10 @@ import model.Orders;
  */
 public class OrderManageScene extends Scene {
 
-    private OrderController control;
+    //private OrderController control;
     public OrderManageScene()
     {
-        control = new OrderController();
+        //control = new OrderController();
     }
 
     @Override
@@ -30,6 +28,7 @@ public class OrderManageScene extends Scene {
     @Override
     public void process() {
         // Create choices
+        /*
         System.out.println( "View orders by?" );
         List<String> choices = new ArrayList<>();
         choices.add( "Mode of payment" );
@@ -82,52 +81,35 @@ public class OrderManageScene extends Scene {
                 System.out.println( "Unknown choice: " + selectedChoice );
                 break;
         }
+        */
     }
     
     public void displayOrdersByCustomerColumn( String columnName, String description )
     {
-        System.out.println( "Showing orders sorted by " + description );
-        displayOrders( control.getOrdersByCustomerColumn( columnName ) );
+        //System.out.println( "Showing orders sorted by " + description );
+        //displayOrders( control.getOrdersByCustomerColumn( columnName ) );
     }
     
     public void displayOrdersByColumn( String columnName, String description )
     {
-        System.out.println( "Showing orders sorted by " + description );
-        displayOrders( control.getOrdersBy( columnName ) );
+        //System.out.println( "Showing orders sorted by " + description );
+        //displayOrders( control.getOrdersBy( columnName ) );
     }
     
     public void displayOrdersByArea()
     {
-        System.out.println( "Showing orders sorted by zip code" );
-        displayOrders( control.getOrdersByAddressZip() );
-    }
-    
-    public static void main( String[] args )
-    {
-        /*
-        //Seeing that selectAllFoodItems actually returns something without error
-        new Connector().selectAllFoodItems().forEach((foodItem) -> {
-            System.out.println( foodItem );
-        });
-        */
-        OrderManageScene scene = new OrderManageScene();
-        while ( true )
-        {
-            scene.process();
-            if ( scene.requestTransition )
-            {
-                System.out.println( "DONE" );
-                break;
-            }
-        }
+        //System.out.println( "Showing orders sorted by zip code" );
+        //displayOrders( control.getOrdersByAddressZip() );
     }
 
     public void displayOrders(ArrayList<Orders> orderList ) 
     {
+        /*
         System.out.println( "Order_Id\t\t\t\tPayment\tOrder Date\t\tDelivery Date\t\tPrice\tZip Code\tUser Email\tUser Name" );
         orderList.forEach((order) -> {
             System.out.println( order );
         });
+        */
     }
 
     

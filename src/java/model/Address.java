@@ -68,5 +68,46 @@ public class Address {
         this.IsDeliverable = IsDeliverable;
     }
 
+    /*
+    private int AddressId;
+    private String Street1;
+    private String Street2;
+    private String City;
+    private String State;
+    private String Zip;
+    private boolean IsDeliverable;
+    */
+    @Override
+    public String toString()
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "{" );
+        toReturn.append( Orders.surroundWithQuotes( "addressid" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( Integer.toString( AddressId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "street" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( Street1 ) );
+        
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "city" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( City ) );
+
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "state" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( State ) );
+
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "zipcode" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( Zip ) );
+        
+        toReturn.append( "}" );
+        return toReturn.toString();
+    }
 }
 
