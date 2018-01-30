@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.syntel.controller;
+package controller;
 
 import java.util.List;
 import model.Connector;
@@ -20,19 +20,17 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author syntel
  */
 
-@Controller("/manageUsers")
-//@SessionAttributes("users")
-
+@Controller
 public class ManageUserController {
     
     //@Autowired
    // private ManageUserDAO userMgt;
     
-    @RequestMapping("/index.htm")
+   /* @RequestMapping("/index.htm")
     public String home(ModelMap model){
         
         return "index";
-    }
+    }*/
     
 
     

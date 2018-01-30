@@ -70,8 +70,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/reactstrap/4.8.0/reactstrap.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-        <script src="./js/react.min.js"></script>
-        <script src="./js/Navbar.js" type="text/babel" ></script>
+        <script src="js/react.min.js"></script>
+        <script src="js/manageUser.js"></script>
+        <script src="js/Navbar.js" type="text/babel" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js"></script>   
         <script type="text/babel">
        
