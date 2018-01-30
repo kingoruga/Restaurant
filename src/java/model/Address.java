@@ -1,113 +1,104 @@
 
 package model;
+import static model.Orders.surroundWithQuotes;
+import java.io.Serializable;
 
+public class Address implements Serializable {
 
-public class Address {
-    private int AddressId;
-    private String Street1;
-    private String Street2;
-    private String City;
-    private String State;
-    private String Zip;
-    private boolean IsDeliverable;
-
+    private int addressId;
+    private String street1;
+    private String street2;
+    private String city;
+    private String state;
+    private String zip;
+    private boolean isDeliverable;
 
     public int getAddressId() {
-        return AddressId;
+        return addressId;
     }
 
-    public void setAddressId(int AddressId) {
-        this.AddressId = AddressId;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public String getStreet1() {
-        return Street1;
+        return street1;
     }
 
-    public void setStreet1(String Street1) {
-        this.Street1 = Street1;
+    public void setStreet1(String street1) {
+        this.street1 = street1;
     }
 
     public String getStreet2() {
-        return Street2;
+        return street2;
     }
 
-    public void setStreet2(String Street2) {
-        this.Street2 = Street2;
+    public void setStreet2(String street2) {
+        this.street2 = street2;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
-    public void setCity(String City) {
-        this.City = City;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
-    public void setState(String State) {
-        this.State = State;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getZip() {
-        return Zip;
+        return zip;
     }
 
-    public void setZip(String Zip) {
-        this.Zip = Zip;
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public boolean isIsDeliverable() {
-        return IsDeliverable;
+        return isDeliverable;
     }
-
-    public void setIsDeliverable(boolean IsDeliverable) {
-        this.IsDeliverable = IsDeliverable;
-    }
-
-    /*
-    private int AddressId;
-    private String Street1;
-    private String Street2;
-    private String City;
-    private String State;
-    private String Zip;
-    private boolean IsDeliverable;
-    */
+    
+    
     @Override
     public String toString()
     {
         StringBuilder toReturn = new StringBuilder();
         toReturn.append( "{" );
-        toReturn.append( Orders.surroundWithQuotes( "addressid" ) );
+        toReturn.append( surroundWithQuotes( "addressId" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( Integer.toString( AddressId) ) );
+        toReturn.append( surroundWithQuotes( Integer.toString(addressId) ) );
         
         toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "street" ) );
+        toReturn.append( surroundWithQuotes( "city" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( Street1 ) );
+        toReturn.append( surroundWithQuotes( city ) );
+        
         
         toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "city" ) );
+        toReturn.append( surroundWithQuotes( "state" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( City ) );
-
+        toReturn.append( surroundWithQuotes( state ) );
+        
+        
         toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "state" ) );
+        toReturn.append( surroundWithQuotes( "zip" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( State ) );
-
-        toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "zipcode" ) );
-        toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( Zip ) );
+        toReturn.append( surroundWithQuotes( zip ) );
         
         toReturn.append( "}" );
         return toReturn.toString();
     }
-}
 
+    public void setIsDeliverable(boolean isDeliverable) {
+        this.isDeliverable = isDeliverable;
+    }
+
+
+}

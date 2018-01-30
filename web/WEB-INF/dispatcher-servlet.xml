@@ -17,6 +17,7 @@
 
 
 
+
     <mvc:annotation-driven/>
     <context:component-scan base-package="controller"/>
     <!--
@@ -29,12 +30,16 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
+
+                <prop key="register.htm">registerController</prop>
+
                 <prop key="getFoodItemsInArea.htm">menuController</prop>
                 <prop key="getFoodItemsForUser.htm">menuController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
-               
-                <prop key="registration.htm">registrationController</prop>
+
                 <prop key="login.htm">loginController</prop>
+                <prop key="logout.htm">logoutController</prop>
+                <prop key="myOrders.htm">myOrdersController</prop>
                 <prop key="manageOrders.htm">orderManageController</prop>
                 <!--prop key="/area/*">areaManageController</prop-->
                 <!--prop key="manageAreaPackages.htm">areaManageController</prop>
@@ -56,15 +61,24 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
+
+    <bean name="menuController"
+            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+            p:viewName="menuView" />
+    <bean name="registerController"
+            class="controller.RegisterController" />
+
     <bean name="myOrdersController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
             p:viewName="myOrders" />
-    <bean name="registrationController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="registration" />
+    
+
     <bean name="loginController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="login" />
+            class="controller.LoginController" />
+    <bean name="logoutController"
+            class="controller.LogoutController" />
+    <bean name="myOrdersController"
+            class="controller.MyOrdersController" />
 
    
     
