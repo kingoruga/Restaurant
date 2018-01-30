@@ -1,3 +1,4 @@
+
 /*
  * NavBar class
  * Properties:
@@ -64,3 +65,4 @@ NavBar = React.createClass({
     }
 });
  
+

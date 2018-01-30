@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
     The col parameter is used by the controller to determine the exact method
         to use to pass along the list of orders to the view.
 */
-@Controller
+//@Controller
 @RequestMapping(value="/manageOrders.htm")
 public class OrderController 
 {

@@ -2,15 +2,23 @@
 <!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
+
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.syntel.controller"/>
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -22,19 +30,23 @@
                 <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
-                <prop key="manageAreas.htm">manageAreasController</prop>
-                <prop key="manageOrders.htm">manageOrdersController</prop>
-                <prop key="manageUsers.htm">manageUsersController</prop>
+               
                 <prop key="registration.htm">registrationController</prop>
                 <prop key="login.htm">loginController</prop>
+                <prop key="manageOrders.htm">orderManageController</prop>
+                <prop key="/area/*">areaManageController</prop>
+                <prop key="manageAreaPackages.htm">areaManageController</prop>
+                <prop key="manageAreas.htm">areaManageController</prop>
             </props>
         </property>
     </bean>
+
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
+
 
     <!--
     The index controller.
@@ -54,14 +66,14 @@
     <bean name="loginController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
             p:viewName="login" />
-    <bean name="manageOrdersController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="manageOrders" />
-    <bean name="manageAreasController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="manageAreas" />
-    <bean name="manageUsersController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="manageUsers" />
+
+   
+    
+    <bean name="orderManageController"
+      class="controller.OrderController" />
+    
+    <bean name="areaManageController"
+      class="controller.AreaManagementController" />
     
 </beans>
+

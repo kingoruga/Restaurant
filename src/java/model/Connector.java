@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -42,12 +43,48 @@ public class Connector {
         }
     }
 
+     public List<OnlineUser> getAllUsers(){
+        List<OnlineUser> users = new ArrayList<>();
+       
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * from Online_user");
+            while(rs.next()){
+                user = new OnlineUser();
+                user.setUserId(rs.getInt(1));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                
+                if(rs.getString(4).equalsIgnoreCase("Yes"))
+                    user.setIsAdmin(true);
+                else
+                    user.setIsAdmin(false);
+                
+                user.setPassword(rs.getString(5));
+                user.setEmail(rs.getString(6));
+                user.setAddressId(rs.getInt(7));
+                
+                if(rs.getString(8).equalsIgnoreCase("Disabled"))
+                    user.setIsBanned(true);              
+                else
+                    user.setIsBanned(false);
+              users.add(user); 
+            }
+             
+        }catch(SQLException ex){
+             ex.getMessage();
+            Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
+           // System.out.println("Unable to fetch areas from database.");
+        }
+        return users;
+    }
+
     public void disableUserQuery(String cmd) {
         try (PreparedStatement pstmt = conn.prepareStatement("Update Online_user set status = 'Disabled' where email=?")) {
             pstmt.setString(1, cmd);
             int count = pstmt.executeUpdate();
             if (count == 1) {
-               // response.userSuccessfullyUpdated(0);
+                System.out.println("user  " + cmd + " disabled!");
             }
         } catch (SQLException ex) {
             ex.getMessage();
@@ -60,8 +97,7 @@ public class Connector {
             pstmt.setString(1, cmd);
             int count = pstmt.executeUpdate();
             if (count == 1) {
-                //send response back to view
-                // response.userSuccessfullyUpdated(1);
+                 System.out.println("user " + cmd + " enabled!");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,14 +109,12 @@ public class Connector {
             pstmt.setString(1, cmd);
             int count = pstmt.executeUpdate();
             if (count == 1) {
-                 //send response back to view
-                // response.userSuccessfullyUpdated(2);
+                 System.out.println("User deleted!");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public boolean userIsDisabledQuery(String email) {
         try (PreparedStatement pstmt = conn.prepareStatement("Select status from Online_user where email=?")) {
             pstmt.setString(1, email);
@@ -97,14 +131,13 @@ public class Connector {
         return false;
     }
 
-    public void changePasswordQuery(String cmd, String password) {
+   public void changePasswordQuery(String cmd, String password) {
         try (PreparedStatement pstmt = conn.prepareStatement("Update Online_user set password = ? where email=?")) {
             pstmt.setString(1, password);
             pstmt.setString(2, cmd);
             int count = pstmt.executeUpdate();
             if (count == 1) {
-                 //send response back to view
-                 //response.userSuccessfullyUpdated(3);
+                 System.out.println("password updated!");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
@@ -739,6 +772,8 @@ public class Connector {
             return 0;
         }
     }
+    
+    
     
    
 }

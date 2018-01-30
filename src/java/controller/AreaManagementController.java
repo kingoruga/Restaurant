@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AreaManagementController 
 {
-    @RequestMapping( value="remove.htm" ,method=RequestMethod.GET )
+    @RequestMapping( value="area/remove.htm" ,method=RequestMethod.GET )
     public String removeArea( @RequestParam("zip") int zipCode )
     {
         Connector dataConnector = new Connector();
@@ -28,7 +28,7 @@ public class AreaManagementController
         return "redirect:/manageAreas.htm";
     }
     
-    @RequestMapping( value="add.htm" ,method=RequestMethod.GET )
+    @RequestMapping( value="area/add.htm" ,method=RequestMethod.GET )
     public String addArea( @RequestParam("zip") int zipCode )
     {
         Connector dataConnector = new Connector();
@@ -91,7 +91,7 @@ public class AreaManagementController
         return new ModelAndView( "manageAreaPackages" , "model" , model );
     }
     
-    @RequestMapping( value="/modifyAreaPackage.htm", method=RequestMethod.GET )
+    @RequestMapping( value="area/modifyAreaPackage.htm", method=RequestMethod.GET )
     public String modifyPackageArea( @RequestParam("zip") int zipCode , @RequestParam("item") String itemId , @RequestParam("command") String command )
     {
         Connector dataConnector = new Connector();
