@@ -36,6 +36,8 @@
         var testUser = {};
         testUser.email = "tester@email.com";
         testUser.isAdmin = true;
+        //this changes what gets shown on the navbar with My Orders
+        testUser.orderCount = 10;
         //get the order list from what the java controller passed
         var ordersList = ${orderList};
         console.log( ordersList );
