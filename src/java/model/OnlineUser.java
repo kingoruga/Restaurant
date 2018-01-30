@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -105,6 +106,50 @@ public class OnlineUser {
 
     public void setAddressId(int addressId) {
         this.addressId = addressId;
+    }
+  
+      /*
+    private int UserId;
+    private String FirstName;
+    private String LastName;
+    private String Email;
+    private String Password;
+    private int AddressId;
+    private boolean IsAdmin;
+    private boolean IsBanned;
+    private Address address;
+    */
+    @Override
+    public String toString()
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "{" );
+        toReturn.append( Orders.surroundWithQuotes( "userid" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( Integer.toString( userId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "name" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( firstName + " " + lastName ) );
+        
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "email" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( email ) );
+
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "admin" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( isAdmin + "" ) );
+
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "banned" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( isBanned + "" ) );
+        
+        toReturn.append( "}" );
+        return toReturn.toString();
     }
 
     

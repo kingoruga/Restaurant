@@ -26,7 +26,11 @@
     p:username="${jdbc.username}"
     p:password="${jdbc.password}" /-->
 
+<<<<<<< HEAD
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -
+=======
+    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) 
+>>>>>>> bdd117dd5116e15d77bd2a1dee13b2a08d76ae08
      <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,7 +42,7 @@ public class Connector {
             System.out.println(e);
         }
     }
-    
+
     public List<OnlineUser> getAllUsers(){
         List<OnlineUser> users = new ArrayList<>();
        
@@ -114,7 +115,6 @@ public class Connector {
             Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public boolean userIsDisabledQuery(String email) {
         try (PreparedStatement pstmt = conn.prepareStatement("Select status from Online_user where email=?")) {
             pstmt.setString(1, email);
@@ -131,7 +131,7 @@ public class Connector {
         return false;
     }
 
-    public void changePasswordQuery(String cmd, String password) {
+public void changePasswordQuery(String cmd, String password) {
         try (PreparedStatement pstmt = conn.prepareStatement("Update Online_user set password = ? where email=?")) {
             pstmt.setString(1, password);
             pstmt.setString(2, cmd);
@@ -270,11 +270,11 @@ public class Connector {
     public List getFoodItemsInArea(int zip){
         List<String> foodInArea = new ArrayList();
         try{
-            PreparedStatement pstmt = conn.prepareStatement("select fi.food_item_id,name || ' - ' || description as Food_Item from food_item fi join availability a on fi.food_item_id = a.food_item_id join service_areas se on a.zip_code = se.zip_code where se.zip_code = ?");
+            PreparedStatement pstmt = conn.prepareStatement("select fi.name from food_item fi join availability a on fi.food_item_id = a.food_item_id join service_areas se on a.zip_code = se.zip_code where se.zip_code = ?");
             pstmt.setInt(1, zip);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
-                foodInArea.add(rs.getString(1)+" "+rs.getString(2));
+                foodInArea.add(rs.getString(1) );
             }
         }catch(SQLException ex){
             System.out.println("Unable to get food in " + zip);
@@ -549,6 +549,7 @@ public class Connector {
            if (count == 1)
                return true;
        }catch(SQLException ex){
+           System.err.println( ex.getMessage() );
            return false;
        }
        return false;
@@ -752,8 +753,27 @@ public class Connector {
         return availabilities;
     }
     
-    
+    //returns the number of orders made by the user who has the id given
+    //returns 0 if the user does not exist or any kind of exception was caught
+    public int countOrdersForUser( int userId )
+    {
+        PreparedStatement statement;
+        try 
+        {
+            statement = conn.prepareStatement( "select count(user_id) AS orderCount FROM ORDERS WHERE user_id=?");
+            statement.setInt(1, userId );
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getInt( "orderCount" );
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
     
    
 }
+
 
