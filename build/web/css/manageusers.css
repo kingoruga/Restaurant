@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 29, 2018, 8:04:06 PM
+    Author     : syntel
+*/
+
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: green;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 80%;
+    top: 50px;
+    font-size: 17px;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 60px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 60px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {top: 60px; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {top: 60px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+
+   #my-div {
+        position: fixed;
+        width: 20%; 
+        z-index: 2; 
+        top: 50%;
+        left: 50%;
+        margin-top: -10%; 
+        margin-left: -10%; 
+
+        /* You will not need the below, its only for styling   purposes. 
+        padding: 10px;
+        border: 2px solid #555555;
+        background-color: #ccc;
+        border-radius: 5px;
+        text-align: center;*/
+    }
+
