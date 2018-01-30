@@ -59,7 +59,7 @@ public class FoodItemController
         Connector dataConnector = new Connector();
         ArrayList items = new ArrayList();
         items.addAll(convertFoodDetailsToJson(dataConnector.getFoodItemDetailsInArea(zipCode)));
-        return new ModelAndView( "getFoodItemsInArea" , "items" , items );
+        return new ModelAndView( "getFoodItemsInArea" , "itemsInArea" , items );
     }
 
     @RequestMapping( value="/getFoodItemsAllAreas.htm", method=RequestMethod.GET )
@@ -68,7 +68,7 @@ public class FoodItemController
         Connector dataConnector = new Connector();
         ArrayList items = new ArrayList();
         items.addAll(convertFoodDetailsToJson(dataConnector.getFoodItemDetailsAllAreas()));
-        return new ModelAndView( "getFoodItemsAllAreas" , "items" , items );
+        return new ModelAndView( "getFoodItemsAllAreas" , "itemsAll" , items );
     }
     
 }

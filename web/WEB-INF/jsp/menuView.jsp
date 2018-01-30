@@ -38,8 +38,8 @@
         testUser.isAdmin = true;
         testUser.orderInProgress = true;
         
-        var itemsListAll = [ <!--get the list from FoodItemController.getFoodItemsAllAreas-->];
-        var itemsListInArea = [<!--get the list from FoodItemController.getFoodItemsInArea(testUser.zip)-->];
+        var itemsListAll = [ ${itemsAll}];
+        var itemsListInArea = [${itemsInArea}];
 
         React.render(
                 <div>
