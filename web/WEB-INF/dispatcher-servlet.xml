@@ -5,9 +5,9 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
@@ -21,10 +21,11 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
-                <prop key="myOrders.htm">myOrdersController</prop>
                 <prop key="manageUsers.htm">manageUsersController</prop>
-                <prop key="registration.htm">registrationController</prop>
+                <prop key="register.htm">registerController</prop>
                 <prop key="login.htm">loginController</prop>
+                <prop key="logout.htm">logoutController</prop>
+                <prop key="myOrders.htm">myOrdersController</prop>
                 <prop key="manageOrders.htm">orderManageController</prop>
                 <prop key="/area/*">areaManageController</prop>
                 <prop key="manageAreaPackages.htm">areaManageController</prop>
@@ -47,15 +48,14 @@
     <bean name="menuController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
             p:viewName="menuView" />
-    <bean name="myOrdersController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="myOrders" />
-    <bean name="registrationController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="registration" />
+    <bean name="registerController"
+            class="controller.RegisterController" />
     <bean name="loginController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="login" />
+            class="controller.LoginController" />
+    <bean name="logoutController"
+            class="controller.LogoutController" />
+    <bean name="myOrdersController"
+            class="controller.MyOrdersController" />
 
     <bean name="manageUsersController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"

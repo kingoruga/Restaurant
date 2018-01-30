@@ -1,49 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
+import java.io.Serializable;
+import static model.Orders.surroundWithQuotes;
 
-/**
- *
- * @author syntel
- */
-public class OnlineUser {
+public class OnlineUser implements Serializable {
     private int UserId;
-    private String FirstName;
-    private String LastName;
-    private String Email;
-    private String Password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
     private int AddressId;
     private boolean IsAdmin;
     private boolean IsBanned;
     private Address address;
-    
-    public OnlineUser()
-    {
-        //default constructor for bean,do nothing
-    }
 
-    public OnlineUser(int id, String fname, String lname, String isAdmin, String email, int addressId, String status){
+    public OnlineUser() {
+        address = new Address();
+    }
+    
+     public OnlineUser(int id, String fname, String lname, String isAdmin, String email, int addressId, String status){
         this.UserId = id;
-        this.FirstName = fname;
-        this.LastName = lname;
+        this.firstName = fname;
+        this.lastName = lname;
         this.IsAdmin = isAdmin.compareToIgnoreCase("yes")==0;
-        this.Email = email;
+        this.email = email;
         this.IsBanned = status.compareToIgnoreCase("Enabled") != 0;
     }
-   
-    
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-           
     public int getUserId() {
         return UserId;
     }
@@ -53,49 +35,37 @@ public class OnlineUser {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public String getPassword() {
+        return password;
     }
 
-    public boolean getIsAdmin() {
-        return IsAdmin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setIsAdmin(boolean IsAdmin) {
-        this.IsAdmin = IsAdmin;
-    }
-
-    public boolean getIsBanned() {
-        return IsBanned;
-    }
-
-    public void setIsBanned(boolean IsBanned) {
-        this.IsBanned = IsBanned;
-    }
-    
     public int getAddressId() {
         return AddressId;
     }
@@ -104,47 +74,74 @@ public class OnlineUser {
         this.AddressId = AddressId;
     }
 
-    /*
-    private int UserId;
-    private String FirstName;
-    private String LastName;
-    private String Email;
-    private String Password;
-    private int AddressId;
-    private boolean IsAdmin;
-    private boolean IsBanned;
-    private Address address;
-    */
+    public boolean isIsAdmin() {
+        return IsAdmin;
+    }
+
+    public void setIsAdmin(boolean IsAdmin) {
+        this.IsAdmin = IsAdmin;
+    }
+
+    public boolean isIsBanned() {
+        return IsBanned;
+    }
+
+    public void setIsBanned(boolean IsBanned) {
+        this.IsBanned = IsBanned;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
     @Override
     public String toString()
     {
         StringBuilder toReturn = new StringBuilder();
         toReturn.append( "{" );
-        toReturn.append( Orders.surroundWithQuotes( "userid" ) );
+        toReturn.append( surroundWithQuotes( "userId" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( Integer.toString( UserId) ) );
+        toReturn.append( surroundWithQuotes( Integer.toString(UserId) ) );
         
         toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "name" ) );
+        toReturn.append( surroundWithQuotes( "firstName" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( FirstName + " " + LastName ) );
+        toReturn.append( surroundWithQuotes( firstName ) );
+                
         
         toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "email" ) );
+        toReturn.append( surroundWithQuotes( "lastName" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( Email ) );
-
+        toReturn.append( surroundWithQuotes( lastName ) );
+                
         toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "admin" ) );
+        toReturn.append( surroundWithQuotes( "email" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( IsAdmin + "" ) );
-
-        toReturn.append( "," );
-        toReturn.append( Orders.surroundWithQuotes( "banned" ) );
-        toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( IsBanned + "" ) );
+        toReturn.append( surroundWithQuotes( email ) );
         
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "isAdmin" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Boolean.toString(IsAdmin) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "isDisabled" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Boolean.toString(IsBanned) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "address" ) );
+        toReturn.append( ":" );
+        toReturn.append( address.toString() );
         toReturn.append( "}" );
         return toReturn.toString();
     }
+    
+
 }
+

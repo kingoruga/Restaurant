@@ -47,10 +47,10 @@ public class UserController {
         user = connector.loginQuery(email, password);
 
         if (user != null) {
-            if (!user.getIsAdmin() && !user.getIsBanned()) {
+            if (!user.isIsAdmin()&& !user.isIsBanned()) {
                 //go to html page for non-admin
                // loginResponse.nonAdminUser(user);
-            } else if (user.getIsAdmin()) {
+            } else if (user.isIsAdmin()) {
                 //go to html page for admin
                // loginResponse.adminUser();
             } else {

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Orders {
+public class Orders implements Serializable {
     private int OrderId;
     private int UserId;
     private int AddressId;
@@ -152,11 +153,33 @@ public class Orders {
         toReturn.append( ":" );
         toReturn.append( surroundWithQuotes( PaymentMethod ) );
         
-        
         toReturn.append( "," );
         toReturn.append( surroundWithQuotes( "price" ) );
         toReturn.append( ":" );
         toReturn.append( surroundWithQuotes( Float.toString( Price ) ) );
+
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "orderDate" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( OrderDate ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "deliveryDate" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( DeliveryDate ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "time" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Time ) );
+        
+        if ( Items != null )
+        {
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "items" ) );
+            toReturn.append( ":" );
+            toReturn.append( Items.toString() );
+        }
         
         if ( orderAddress != null )
         {
@@ -166,54 +189,8 @@ public class Orders {
             toReturn.append( orderAddress.toString() );
         }
         
-        if ( user != null )
-        {
-            toReturn.append( "," );
-            toReturn.append( surroundWithQuotes( "user" ) );
-            toReturn.append( ":" );
-            toReturn.append( user.toString() );
-        }
-        
         toReturn.append( "}" );
         return toReturn.toString();
-        /*
-        StringBuilder toReturn = new StringBuilder();
-        toReturn.append( Integer.toString(OrderId) );
-        toReturn.append( "\t" );
-        toReturn.append( PaymentMethod );
-        toReturn.append( "\t" );
-        toReturn.append( OrderDate );
-        toReturn.append( "\t" );
-        toReturn.append( DeliveryDate );
-        toReturn.append( "\t" );
-        toReturn.append( Price );
-        toReturn.append( "\t" );
-        if ( orderAddress != null )
-        {
-            toReturn.append( orderAddress.getZip() );
-            toReturn.append( "\t" );
-        }
-        else
-        {
-            toReturn.append( "NULL ADDRESS" );
-            toReturn.append( "\t" );
-        }
-        
-        if ( user != null )
-        {
-            toReturn.append( user.getEmail() );
-            toReturn.append( "\t" );
-            toReturn.append( user.getFirstName() );
-            toReturn.append( " " );
-            toReturn.append( user.getLastName() );
-        }
-        else
-        {
-            toReturn.append( "NULL USER" );
-            toReturn.append( "\t" );
-        }
-        return toReturn.toString();
-        */
     }
 
 }
