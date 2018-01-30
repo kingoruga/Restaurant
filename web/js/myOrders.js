@@ -204,7 +204,7 @@ var Order = React.createClass({
                             </div>
                             <div className="row">
                                 <span className='align-text-bottom align-bottom'>
-                                    <span>Day ordered: {this.state.order.orderDate}</span>, <span>Days remaining: {diffDays}</span>
+                                    <span>Day ordered: {orderDate}</span>, <span>Days remaining: {diffDays}</span>
                                 </span>
                             </div>
                         </div>
