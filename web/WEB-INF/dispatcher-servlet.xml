@@ -21,6 +21,8 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
+                <prop key="getFoodItemsInArea.htm">menuController</prop>
+                <prop key="getFoodItemsForUser.htm">menuController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
                 <prop key="manageUsers.htm">manageUsersController</prop>
                 <prop key="registration.htm">registrationController</prop>
@@ -44,9 +46,6 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
-    <bean name="menuController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="menuView" />
     <bean name="myOrdersController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
             p:viewName="myOrders" />
@@ -66,5 +65,8 @@
     
     <bean name="areaManageController"
       class="controller.AreaManagementController" />
+    
+    <bean name="menuController"
+            class="controller.FoodItemController" />
     
 </beans>
