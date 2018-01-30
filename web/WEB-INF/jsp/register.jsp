@@ -30,7 +30,7 @@
             </div>
             <p>Register as a customer. All fields are required to be filled out for successful registration.</p>
             <hr>
-            <form:form method="POST" commandName="user">
+            <form:form method="POST" commandName="userModel">
 
                 <h4>Login information</h4>
                 <div class="form-group">
@@ -134,7 +134,6 @@
         </div>
         </div>
         <script>
-            //define this here so that it can be used later
             var NavBar;
         </script>
         <script src="./js/react.min.js"></script>
@@ -142,7 +141,11 @@
         <script src="./js/Navbar.js" type="text/babel" ></script>
         <script type="text/babel">
             var user = eval(${user});
-            React.render(<NavBar user={user} />, document.getElementById( "navbar" ));
+            React.render(
+                <div>
+                    <NavBar user={user} />
+                </div>
+            , document.getElementById( "navbar" ))
         </script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

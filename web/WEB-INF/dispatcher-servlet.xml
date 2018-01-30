@@ -50,17 +50,11 @@
     <bean name="registerController"
           class="com.syntel.controller.RegisterController" />
 
-<!--
     <bean name="myOrdersController"
           class="com.syntel.controller.MyOrdersController" />
--->
 
     <bean name="viewMenuController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="viewMenu"/>
-
-    <bean name="myOrdersController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="myOrders"/>
 
 </beans>

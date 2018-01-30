@@ -1,12 +1,16 @@
 package com.syntel.DAO;
 
 import com.syntel.domain.Address;
+import com.syntel.domain.FoodItem;
 import com.syntel.domain.OnlineUser;
+import com.syntel.domain.Orders;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
+import static java.util.stream.Collectors.toList;
 
 public class OnlineUserDAOImpl implements OnlineUserDAO {
     private JdbcTemplate jdbcTemplate;
@@ -75,4 +79,55 @@ public class OnlineUserDAOImpl implements OnlineUserDAO {
             return null;
     }
 
+    @Override
+    public List<Orders> getOrdersFor(OnlineUser user) {
+        
+        // Get user information
+        String p_query = "select * from orders where user_id=?";
+        Object[] params = { user.getUserId() };
+        int[] args = { Types.NUMERIC };
+        OrdersRowMapper rowMapper = new OrdersRowMapper();
+        List<Orders> result = (List<Orders>) jdbcTemplate
+                .query(p_query, params, args, rowMapper)
+                .stream().map(o -> (Orders) o)
+                .collect(toList());
+        
+        // Fill each order with it's array of items and it's address
+        for(Orders o: result) {
+            
+            // get food ids
+            p_query = "select distinct food_item_id from order_items where order_id=?";
+            Object[] foodParams = { o.getOrderId() };
+            int[] foodArgs = { Types.NUMERIC };
+            
+            ArrayList<FoodItem> food = (ArrayList<FoodItem>) jdbcTemplate 
+                // Get every id associated with this order 
+                .query(p_query, foodParams, foodArgs, (rs) -> {
+                    List<Integer> rid = new ArrayList<>();
+                    while (rs.next())
+                        rid.add(rs.getInt(1));
+                    return rid;
+                // Get food item associated with that id
+                }).stream().map((id) -> {
+                    String fQuery = "select * from food_item where food_item_id=?";
+                    Object[] fParam = { id };
+                    int[] fArg = { Types.NUMERIC };
+                    List fResult = jdbcTemplate.query(fQuery, fParam, fArg, new FoodItemRowMapper());
+                    return (FoodItem) fResult.get(0);
+                }).collect(toList());
+            
+            o.setItems(food);
+            
+            // get address
+            p_query = "select * from address where address_id=?";
+            Object[] addressParams = { o.getAddressId()};
+            int[] addressArgs = { Types.NUMERIC };
+            List aResult = jdbcTemplate.query(p_query, addressParams, addressArgs, new AddressRowMapper());
+            if (aResult.size() > 0)
+                o.setOrderAddress((Address) aResult.get(0));
+        }
+            
+        
+        return result;
+    }
 }

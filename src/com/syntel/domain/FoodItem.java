@@ -1,5 +1,6 @@
 package com.syntel.domain;
 
+import static com.syntel.domain.Orders.surroundWithQuotes;
 import java.util.ArrayList;
 
 public class FoodItem {
@@ -98,9 +99,37 @@ public class FoodItem {
 
     public String toString() {
         StringBuilder toReturn = new StringBuilder();
-        toReturn.append(Name);
-        toReturn.append("\t");
-        toReturn.append(Description);
+        toReturn.append( "{" );
+        toReturn.append( surroundWithQuotes( "food_item_id" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Integer.toString(FoodItemId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "name" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Name ) );
+
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "description" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Description ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "price" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Float.toString( Price ) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "type" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Type ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "is_veg" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Boolean.toString(IsVeg) ) );
+        
+        toReturn.append( "}" );
         return toReturn.toString();
     }
 }
