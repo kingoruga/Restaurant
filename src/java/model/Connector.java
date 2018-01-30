@@ -248,6 +248,35 @@ public class Connector {
         }
         return foodInArea;
     }
+    
+    public List getFoodItemDetailsInArea(int zip){
+        List<String> foodInArea = new ArrayList();
+        try{
+            PreparedStatement pstmt = conn.prepareStatement("select fi.name, fi.description, fi.price, fi.is_veg, fi.image from food_item fi join availability a on fi.food_item_id = a.food_item_id join service_areas se on a.zip_code = se.zip_code where se.zip_code = ?");
+            pstmt.setInt(1, zip);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                foodInArea.add(rs.getString(1) );
+            }
+        }catch(SQLException ex){
+            System.out.println("Unable to get food in " + zip);
+        }
+        return foodInArea;
+    }
+    
+    public List getFoodItemDetailsAllAreas(){
+        List<String> allFood = new ArrayList();
+        try{
+            PreparedStatement pstmt = conn.prepareStatement("select fi.name, fi.description, fi.price, fi.is_veg, fi.image from food_item fi ");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                allFood.add(rs.getString(1) );
+            }
+        }catch(SQLException ex){
+            System.out.println("Unable to get food");
+        }
+        return allFood;
+    }
 
     public List<FoodItem> foodAvailableFor(String email) {
 

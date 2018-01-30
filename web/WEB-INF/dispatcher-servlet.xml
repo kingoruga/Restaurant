@@ -29,6 +29,9 @@
                 <prop key="/area/*">areaManageController</prop>
                 <prop key="manageAreaPackages.htm">areaManageController</prop>
                 <prop key="manageAreas.htm">areaManageController</prop>
+                <prop key="getFoodItemsInArea">FoodItemController</prop>
+                <prop key="getFoodItemsAllAreas">FoodItemController</prop>
+                
             </props>
         </property>
     </bean>
@@ -66,5 +69,8 @@
     
     <bean name="areaManageController"
       class="controller.AreaManagementController" />
+    
+    <bean name="FoodItemController"
+    class="controller.FoodItemController"/>
     
 </beans>

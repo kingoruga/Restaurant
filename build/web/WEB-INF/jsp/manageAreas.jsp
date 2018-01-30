@@ -34,24 +34,19 @@
         //change the following to test out whether the navbar changes correctly
         var testUser = {};
         testUser.email = "tester@email.com";
-        testUser.isAdmin = false;
-        
-        var areaList = [
-            {
-                "zipcode" : 12345
-            },
-            {
-                "zipcode" : 23456
-            },
-            {
-                "zipcode" : 56791
-            }
-        ];
+        testUser.isAdmin = true;
+        var areaList= ${areaList};
+        console.log( areaList );
 
         React.render(
                 <div>
                     <NavBar user={testUser} />
                     <AreaTable areas={areaList} />
+                    <form className="form-inline" method="GET" action="area/add.htm">
+                        <label>Zip Code:</label>
+                        <input type="number" name="zip" placeholder="12345" className="form-control" min="0" max="99999" required={true}/>
+                        <input type="submit" value="Add Zip" className="btn btn-primary"/>
+                    </form>
                 </div>
             , document.getElementById( "mainContainer" )
         );

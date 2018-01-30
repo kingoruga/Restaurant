@@ -38,37 +38,17 @@
         testUser.isAdmin = true;
         testUser.orderInProgress = true;
         
-        var itemsList = [
-            {
-                "name" : "Chicken Tikka Masala",
-                "price" : 10.00,
-                "des" : "Chicken marinated in a Yogurt tomato sauce. Creamy texture.",
-                "veg" : "No",
-                "image": <image src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Chicken_tikka_masala.jpg/90px-Chicken_tikka_masala.jpg"/>
-                
-            },
-            {
-                "name" : "Kofta",
-                "price" : 8.00,
-                "des" : "Gram flour balls fried with vegetables. Gram flour, veggies, rolled into balls with gram flour and fried in oil and then cooked with curry.", 
-                "veg" : "Yes",
-                "image": <image src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Paneer_Kofta_Curry_-_Kolkata_2011-09-20_5426.JPG/120px-Paneer_Kofta_Curry_-_Kolkata_2011-09-20_5426.JPG"/>
-                
-            },
-            {
-                "name" : "Chana Masala",
-                "price" : 9.00,
-                "des" : "Chickpeas of the Chana type in tomato based sauce.", 
-                "veg" : "Yes",
-                "image": <image src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Choleindia.jpg/120px-Choleindia.jpg"/>
-                
-            }
-        ];
+        var itemsListAll = [ <!--get the list from FoodItemController.getFoodItemsAllAreas-->];
+        var itemsListInArea = [<!--get the list from FoodItemController.getFoodItemsInArea(testUser.zip)-->];
 
         React.render(
                 <div>
                     <NavBar user={testUser} />
-                    <ItemTable items={itemsList} />
+                    if(testUser.orderInProgress == true){
+                        <ItemTable items={itemsListInArea} />
+                        };
+                    else{
+                       <ItemTable items={itemsListAll}/>
                 </div>
             , document.getElementById( "mainContainer" )
         );
