@@ -1,4 +1,3 @@
-
 var AddressForm = React.createClass({
    render: function() {
        return (
@@ -100,7 +99,8 @@ var Order = React.createClass({
     getInitialState: function() {
         return {
             dropdownVisible: false,
-            dropdownIndex: 0
+            dropdownIndex: 0,
+            order: this.props.order
         }
     },
     
@@ -181,6 +181,14 @@ var Order = React.createClass({
     },
     
     render: function() {
+        
+        var food = this.state.order.items[0];
+        var orderDate = this.state.order.orderDate;
+
+        var daysRemaining = new Date(this.state.order.deliveryDate)
+        var timeDiff = Math.abs(daysRemaining.getTime() - (new Date()).getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        
         return (
             <div className="container item">
                 <div className="row">
@@ -188,14 +196,14 @@ var Order = React.createClass({
                     <div className="col-md-10 h-50">
                         <div className='space'>
                             <div className="row">
-                                <h4>[ food type ]</h4>
+                                <h4>{food.type}</h4>
                             </div>
                             <div className="row">
-                                <p>[ food description ]</p>
+                                <p>{food.description}</p>
                             </div>
                             <div className="row">
                                 <span className='align-text-bottom align-bottom'>
-                                    <span>Day ordered: [ date ]</span>, <span>Days remaining: [ number ]</span>
+                                    <span>Day ordered: {orderDate}</span>, <span>Days remaining: {diffDays}</span>
                                 </span>
                             </div>
                         </div>
@@ -215,24 +223,29 @@ var Order = React.createClass({
 var OrderPage = React.createClass({
         
     render: function() {
+        var orders = this.props.orders.map((o, i) => {
+            return (<Order order={o} key={i} />);
+        });
+
         return (
-            <div className='container'>
-                <div className="page-header">
-                    <h2>My orders</h2>
-                </div>
+            <div>
+                <NavBar user={user} />
+                <div className='container'>
+                    <div className="page-header">
+                        <h2>My orders</h2>
+                    </div>
 
-                <p>Manage all your ongoing orders. You currently have <b>3</b> ongoing order/s.</p>
-                <hr />
+                    <p>Manage all your ongoing orders. You currently have <b>{orders.length}</b> ongoing order/s.</p>
+                    <hr />
 
-                <div className="container-fluid">
-                    <Order />
-                    <Order />
-                    <Order />
+                    <div className="container-fluid">
+                        {orders}
+                    </div>
                 </div>
             </div>
         )
     }
 });
 
-React.render(<OrderPage />,
+React.render(<OrderPage orders={orders} />,
         document.getElementById('react-container'));

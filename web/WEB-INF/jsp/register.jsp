@@ -1,10 +1,11 @@
 <%-- 
-    Document   : registration
-    Created on : Jan 25, 2018, 3:07:36 PM
+    Document   : register
+    Created on : Jan 25, 2018, 11:52:33 AM
     Author     : syntel
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,49 +13,45 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" crossorigin="anonymous"> -->
-        <link rel="stylesheet" href="bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
         <style>
             /* add stylesheet */
             h4 { margin-top: 24px; }
             form button { margin-bottom: 24px; }
         </style>
     </head>
-
     <body>
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
-            <a class="navbar-brand" href="#">Mummy's Restaurant</a>
-            <a class="nav-link text-light" href="#">View Menu</a>
-            <a class="nav-link text-light" href="#">Login/Register</a>
-        </nav>
-
-        <div class="container">
+        <div>
+            <div id="navbar"></div>
+            <div class="container">
 
             <div class="page-header">
                 <H2>Registration</H2>
             </div>
             <p>Register as a customer. All fields are required to be filled out for successful registration.</p>
             <hr>
-            <form>
+            <form:form method="POST" commandName="userModel">
 
                 <h4>Login information</h4>
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input required type="email" class="form-control" id="email" placeholder="name@example.com">
+                    <form:input path="email" required="true" type="email" cssClass="form-control" id="email" placeholder="name@example.com" />
                 </div>
+                
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input required type="password" class="form-control" id="password" placeholder="Password">
+                    <form:password path="password" required="true" class="form-control" id="password" placeholder="Password" />
                 </div>
 
                 <h4>Personal details</h4>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="firstname">First name</label>
-                        <input required type="text" class="form-control" id="firstname" placeholder="First name">
+                        <form:input path="firstName" required="true" type="text" class="form-control" id="firstname" placeholder="First name" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastname">Last name</label>
-                        <input required type="text" class="form-control" id="lastname" placeholder="Last name">
+                        <form:input path="lastName" required="true" type="text" class="form-control" id="lastname" placeholder="Last name" />
                     </div>
                 </div>
 
@@ -62,16 +59,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="address">Street address</label>
-                        <input required type="text" class="form-control" id="address" placeholder="1234 Main St">
+                        <form:input path="address.street1" required="true" type="text" class="form-control" id="address" placeholder="1234 Main St" />
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="city">City</label>
-                        <input required type="text" class="form-control" id="city">
+                        <form:input path="address.city" required="true" type="text" class="form-control" id="city" />
                     </div>
                     <div class="form-group col-md-2">
                         <label for="state">State</label>
-                        <select id="state" class="form-control">
+                        <form:select path="address.state" id="state" class="form-control">
                             <option value="AK">Alaska</option>
                             <option value="AL">Alabama</option>
                             <option value="AR">Arkansas</option>
@@ -124,19 +121,35 @@
                             <option value="WI">Wisconsin</option>
                             <option value="WV">West Virginia</option>
                             <option value="WY">Wyoming</option>
-                        </select>
+                        </form:select>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="zip">Zip</label>
-                        <input required type="number" class="form-control" id="zip">
+                        <form:input path="address.zip" required="true" type="number" class="form-control" id="zip" />
                     </div>
                 </div>
-                <hr> 
+                <hr />
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
-            </form>
+            </form:form>
         </div>
+        </div>
+        <script>
+            var NavBar;
+        </script>
+        <script src="./js/react.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js" crossorigin="anonymous"></script>
+        <script src="./js/Navbar.js" type="text/babel" ></script>
+        <script type="text/babel">
+            var user = eval(${user});
+            React.render(
+                <div>
+                    <NavBar user={user} />
+                </div>
+            , document.getElementById( "navbar" ))
+        </script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     </body>
 </html>
+

@@ -43,7 +43,7 @@ public class Connector {
         }
     }
 
-    public List<OnlineUser> getAllUsers(){
+     public List<OnlineUser> getAllUsers(){
         List<OnlineUser> users = new ArrayList<>();
        
         try{
@@ -131,7 +131,7 @@ public class Connector {
         return false;
     }
 
-public void changePasswordQuery(String cmd, String password) {
+   public void changePasswordQuery(String cmd, String password) {
         try (PreparedStatement pstmt = conn.prepareStatement("Update Online_user set password = ? where email=?")) {
             pstmt.setString(1, password);
             pstmt.setString(2, cmd);
@@ -773,7 +773,8 @@ public void changePasswordQuery(String cmd, String password) {
         }
     }
     
+    
+    
    
 }
-
 
