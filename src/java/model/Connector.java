@@ -35,7 +35,7 @@ public class Connector {
 
     public Connector() {
         try {
-            //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "hr", "hr");
         } catch (SQLException e) {
             System.out.println(e);
