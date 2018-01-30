@@ -36,10 +36,12 @@ NavBar = React.createClass({
     {
         return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
-            <a className="navbar-brand" href="index.html">Mummy's Restaurant</a>
+
+            <a className="navbar-brand" href="index.htm">Mummy's Restaurant</a>
             <a className="nav-link text-light" href="menuView.htm">View Menu</a>
             <a className="nav-link text-light" href="login.htm">Login</a>
             <a className="nav-link text-light" href="register.htm">Register</a>
+
         </nav>
         );
     },
