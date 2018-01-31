@@ -15,11 +15,8 @@
        http://www.springframework.org/schema/context/spring-context-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
+    <mvc:annotation-driven />
 
-
-
-    <mvc:annotation-driven/>
-    <context:component-scan base-package="controller"/>
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -30,17 +27,12 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
-
                 <prop key="register.htm">registerController</prop>
-
-                <prop key="getFoodItemsInArea.htm">menuController</prop>
-                <prop key="getFoodItemsForUser.htm">menuController</prop>
-                <prop key="myOrders.htm">myOrdersController</prop>
-
                 <prop key="login.htm">loginController</prop>
                 <prop key="logout.htm">logoutController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
                 <prop key="manageOrders.htm">orderManageController</prop>
+                <prop key="manageUsers.htm">manageUserController</prop>
                 <!--prop key="/area/*">areaManageController</prop-->
                 <!--prop key="manageAreaPackages.htm">areaManageController</prop>
                 <prop key="manageAreas.htm">areaManageController</prop-->
@@ -54,7 +46,6 @@
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
 
-
     <!--
     The index controller.
     -->
@@ -62,37 +53,29 @@
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
 
-    <bean name="menuController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="menuView" />
     <bean name="registerController"
             class="controller.RegisterController" />
 
-    <bean name="myOrdersController"
-            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="myOrders" />
-    
-
     <bean name="loginController"
             class="controller.LoginController" />
+
     <bean name="logoutController"
             class="controller.LogoutController" />
+
     <bean name="myOrdersController"
             class="controller.MyOrdersController" />
 
-   
-    
     <bean name="orderManageController"
       class="controller.OrderController" />
     
     <!--bean name="areaManageController"
       class="controller.AreaManagementController" /-->
-    
 
     <bean name="menuController"
             class="controller.FoodItemController" />
-    
 
+    <bean name="manageUserController"
+            class="controller.ManageUserController" />
 
 </beans>
 

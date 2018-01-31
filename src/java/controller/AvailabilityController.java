@@ -26,18 +26,19 @@ public class AvailabilityController extends SimpleFormController {
     
     @Override
     protected ModelAndView onSubmit(Object command) throws Exception{
-        
-                
+
         Availability availability =(Availability)command;
-        
-        
+
+        /*
+
         FoodItemController fclass = new FoodItemController();
         
         FoodItem fitem = fclass.getFoodItem();
         
         System.out.println(availability);
         
-        fitem.addAvailability(availability);
+        fitem.setAvailability(availability);
+        */
                 
                
         return new ModelAndView("redirect:commit.htm");

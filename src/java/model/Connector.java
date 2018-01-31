@@ -6,9 +6,6 @@
  */
 package model;
 
-
-import controller.UserController;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,7 +29,6 @@ public class Connector {
 
     Connection conn;
     OnlineUser user;
-    UserController response = new UserController();
 
     public Connector() {
         try {
@@ -55,7 +51,7 @@ public class Connector {
                 user.setFirstName(rs.getString(2));
                 user.setLastName(rs.getString(3));
                 
-                if(rs.getString(4).equalsIgnoreCase("Yes"))
+                if(rs.getString(4) != null && rs.getString(4).equalsIgnoreCase("Yes"))
                     user.setIsAdmin(true);
                 else
                     user.setIsAdmin(false);
@@ -64,7 +60,7 @@ public class Connector {
                 user.setEmail(rs.getString(6));
                 user.setAddressId(rs.getInt(7));
                 
-                if(rs.getString(8).equalsIgnoreCase("Disabled"))
+                if(rs.getString(8) != null && rs.getString(8).equalsIgnoreCase("Disabled"))
                     user.setIsBanned(true);              
                 else
                     user.setIsBanned(false);
@@ -267,8 +263,8 @@ public class Connector {
         return allAreas;
     }
     
-    public List getFoodItemsInArea(int zip){
-        List<String> foodInArea = new ArrayList();
+    public List<String> getFoodItemsInArea(int zip){
+        List<String> foodInArea = new ArrayList<>();
         try{
             PreparedStatement pstmt = conn.prepareStatement("select fi.name from food_item fi join availability a on fi.food_item_id = a.food_item_id join service_areas se on a.zip_code = se.zip_code where se.zip_code = ?");
             pstmt.setInt(1, zip);

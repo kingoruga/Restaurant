@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAO.FoodDAO;
 import model.FoodItem;
 import model.Availability;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 public class CommitController extends SimpleFormController {
     
       
-    public CommitController() {        
+    public CommitController() {
         setCommandName("commit");
         setCommandClass(FoodItem.class);
         
@@ -29,12 +30,11 @@ public class CommitController extends SimpleFormController {
                
         FoodItemController fclass = new FoodItemController();
         
-        FoodItem fitem = fclass.getFoodItem();
-        
-                                
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("test.xml");
+        FoodItem f = fclass.getFoodItem();
+
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
         FoodDAO foodDOA=(FoodDAO)ctx.getBean("foodDOA");
-        foodDOA.createFoodQuery(fitem);        
+        foodDOA.createFoodQuery(f);
         
         return new ModelAndView("managePackages");
     }

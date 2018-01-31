@@ -32,6 +32,7 @@
         <script src="js/Navbar.js" type="text/babel" ></script>
         <script type="text/babel">
             var user = eval(${user});
+            console.log(user);
             React.render(
                 <div>
                     <NavBar user={user} />

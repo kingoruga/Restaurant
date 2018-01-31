@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import DAO.OnlineUserDAO;
@@ -18,7 +13,7 @@ import org.springframework.web.servlet.mvc.Controller;
 
 public class MyOrdersController implements Controller {
     
-    OnlineUserDAO dao;
+    private OnlineUserDAO dao;
 
     public MyOrdersController() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("../applicationContext.xml");

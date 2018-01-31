@@ -86,7 +86,7 @@ var OrderDropdown = React.createClass({
                 <p>Current {this.props.title}: </p>
                 <form>
                     {this.props.children}
-                    <input type='hidden' id='orderId' value={this.props.orderId} />
+                    <input type='hidden' id='orderId' value={this.props.orderid} />
                     <button>Change</button>
                 </form>
             </div>
@@ -181,7 +181,10 @@ var Order = React.createClass({
     },
     
     render: function() {
-        
+
+        if (this.state.order.items.length === 0)
+            return "<span></span>";
+
         var food = this.state.order.items[0];
         var orderDate = this.state.order.orderDate;
 

@@ -50,7 +50,7 @@ NavBar = React.createClass({
         
         //call a different function and return its return value depending
         //  on whether the user is logged in/is an admin/just a visitor
-        else if ( this.props.user.email != null && this.props.user.isAdmin === "true" )
+        else if ( this.props.user.email != null && this.props.user.admin === "true" )
         {
             return this.renderAdminNav();
         }

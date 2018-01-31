@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AreaManagementController 
 {
-    @RequestMapping( value="area/remove.htm" ,method=RequestMethod.GET )
+    @RequestMapping( value="area/remove.htm", method= RequestMethod.GET )
     public String removeArea( @RequestParam("zip") int zipCode )
     {
         Connector dataConnector = new Connector();
@@ -46,7 +46,7 @@ public class AreaManagementController
     
     private List convertFoodToJson( List items )
     {
-        List toReturn = new ArrayList();
+        List<String> toReturn = new ArrayList<>();
         for ( Object item : items )
         {
             if ( !( item instanceof FoodItem ) )
@@ -83,11 +83,11 @@ public class AreaManagementController
         );
         //list of strings containing names of the food items that are available
         //  also puts quotes around the names for json
-        model.put( "available" , dataConnector.getFoodItemsInArea( zipCode )
-            .stream()
-            .map( str -> "\"" + str.toString() + "\"" ) 
-            .collect( Collectors.toList() ) 
-        );
+        List<String> available = dataConnector.getFoodItemsInArea( zipCode )
+                .stream()
+                .map( str -> "\"" + str + "\"" )
+                .collect( Collectors.toList() );
+        model.put( "available" , available );
         return new ModelAndView( "manageAreaPackages" , "model" , model );
     }
     

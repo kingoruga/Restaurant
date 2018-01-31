@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 public class LoginController extends SimpleFormController {
 
-    OnlineUserDAO dao;
+    private OnlineUserDAO dao;
 
     public LoginController() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("../applicationContext.xml");

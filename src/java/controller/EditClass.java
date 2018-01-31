@@ -4,14 +4,15 @@
  */
 package controller;
 
-import model.FoodItem;
+import DAO.FoodDAO;
 import model.Availability;
-import java.util.ArrayList;
+import model.FoodItem;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -33,12 +34,12 @@ public class EditClass extends SimpleFormController {
     protected ModelAndView onSubmit(Object command) throws Exception{
         
         FoodItem fooditem=(FoodItem)command;        
-            ApplicationContext ctx=new ClassPathXmlApplicationContext("test.xml");
+            ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
             FoodDAO foodDOA=(FoodDAO)ctx.getBean("foodDOA");
          
          if(foodItem!=null) {
                            
-                fooditem.setAvailability(foodItem.getAvailability());
+                // fooditem.setAvailability(foodItem.getAvailability());
                 foodDOA.deleteFoodQuery(foodItem);
                 foodDOA.createFoodQuery(fooditem);                
                 

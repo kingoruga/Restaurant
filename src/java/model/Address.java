@@ -76,11 +76,17 @@ public class Address implements Serializable {
         toReturn.append( surroundWithQuotes( Integer.toString(addressId) ) );
         
         toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "street" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( street1 ) );
+        
+
+        toReturn.append( "," );
         toReturn.append( surroundWithQuotes( "city" ) );
         toReturn.append( ":" );
         toReturn.append( surroundWithQuotes( city ) );
-        
-        
+
+
         toReturn.append( "," );
         toReturn.append( surroundWithQuotes( "state" ) );
         toReturn.append( ":" );

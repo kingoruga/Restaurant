@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAO.FoodDAO;
 import model.FoodItem;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,7 +25,7 @@ public class DeleteFoodController extends SimpleFormController {
     @Override
     protected ModelAndView onSubmit(Object command) throws Exception{
         FoodItem fooditem=(FoodItem)command;        
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("test.xml");
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
         FoodDAO foodDOA=(FoodDAO)ctx.getBean("foodDOA");
         foodDOA.deleteFoodQuery(fooditem);
         

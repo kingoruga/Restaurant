@@ -1,17 +1,8 @@
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author syntel
- */
-public class OnlineUser implements Serializable{
+import java.io.Serializable;
+
+public class OnlineUser implements Serializable {
     private int userId;
     private String firstName;
     private String lastName;
@@ -34,8 +25,7 @@ public class OnlineUser implements Serializable{
     public OnlineUser() {
         address = new Address();
     }
-   
-    
+
     public Address getAddress() {
         return address;
     }
@@ -44,7 +34,6 @@ public class OnlineUser implements Serializable{
         this.address = address;
     }
 
-           
     public int getUserId() {
         return userId;
     }
@@ -148,7 +137,12 @@ public class OnlineUser implements Serializable{
         toReturn.append( Orders.surroundWithQuotes( "banned" ) );
         toReturn.append( ":" );
         toReturn.append( Orders.surroundWithQuotes( isBanned + "" ) );
-        
+
+        toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "address" ) );
+        toReturn.append( ":" );
+        toReturn.append( address.toString() );
+
         toReturn.append( "}" );
         return toReturn.toString();
     }
