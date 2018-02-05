@@ -11,8 +11,8 @@
         <title>Mummy's Restaurant</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" crossorigin="anonymous"> -->
-        <link rel="stylesheet" href="bootstrap.min.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/nav.css" />
         <style>
             /* add stylesheet */
             h4 { margin-top: 24px; }

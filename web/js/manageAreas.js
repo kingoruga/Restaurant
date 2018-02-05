@@ -2,11 +2,13 @@
 AreaRow = React.createClass({
    render: function()
    {
+       var removalUrl = "area/remove.htm?zip=" + this.props.area;
+       var packagesUrl = "manageAreaPackages.htm?zip=" + this.props.area;
        return (
             <tr>
-                <td>{this.props.area.zipcode}</td>
-                <td><a href="#">Packages</a></td>
-                <td><a href="#">Remove</a></td>
+                <td>{this.props.area}</td>
+                <td><a href={packagesUrl}>Packages</a></td>
+                <td><a href={removalUrl}>Remove</a></td>
             </tr>    
         );
    }

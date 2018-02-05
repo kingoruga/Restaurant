@@ -129,45 +129,78 @@ public class Orders {
         return this.orderAddress;
     }
 
-    @Override
+    public static String surroundWithQuotes( String toSurround )
+    {
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append( "\"" );
+        toReturn.append( toSurround );
+        toReturn.append( "\"" );
+        return toReturn.toString();
+    }
+    
+  @Override
     public String toString()
     {
         StringBuilder toReturn = new StringBuilder();
-        toReturn.append( Integer.toString(OrderId) );
-        toReturn.append( "\t" );
-        toReturn.append( PaymentMethod );
-        toReturn.append( "\t" );
-        toReturn.append( OrderDate );
-        toReturn.append( "\t" );
-        toReturn.append( DeliveryDate );
-        toReturn.append( "\t" );
-        toReturn.append( Price );
-        toReturn.append( "\t" );
+        toReturn.append( "{" );
+        toReturn.append( surroundWithQuotes( "orderid" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Integer.toString(OrderId) ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "payment" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( PaymentMethod ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "price" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Float.toString( Price ) ) );
+
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "orderDate" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( OrderDate ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "deliveryDate" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( DeliveryDate ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "time" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Time ) );
+        
+        if ( Items != null )
+        {
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "items" ) );
+            toReturn.append( ":" );
+            toReturn.append( Items.toString() );
+        }
+        
         if ( orderAddress != null )
         {
-            toReturn.append( orderAddress.getZip() );
-            toReturn.append( "\t" );
-        }
-        else
-        {
-            toReturn.append( "NULL ADDRESS" );
-            toReturn.append( "\t" );
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "address" ) );
+            toReturn.append( ":" );
+            toReturn.append( orderAddress.toString() );
         }
         
         if ( user != null )
         {
-            toReturn.append( user.getEmail() );
-            toReturn.append( "\t" );
-            toReturn.append( user.getFirstName() );
-            toReturn.append( " " );
-            toReturn.append( user.getLastName() );
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "user" ) );
+            toReturn.append( ":" );
+            toReturn.append( user.toString() );
         }
-        else
-        {
-            toReturn.append( "NULL USER" );
-            toReturn.append( "\t" );
-        }
+        
+        toReturn.append( "}" );
         return toReturn.toString();
     }
+
+
+    
 
 }
