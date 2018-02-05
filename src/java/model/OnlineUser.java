@@ -1,11 +1,12 @@
 
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package model;
+
+import java.io.Serializable;
 
 /**
  *
@@ -21,6 +22,11 @@ public class OnlineUser implements Serializable{
     private boolean isAdmin;
     private boolean isBanned;
     private Address address;
+    
+    /*private String street;
+    private String city;
+    private String state;
+    private int zip;*/
 
     public OnlineUser(int id, String fname, String lname, String isAdmin, String email, int addressId, String status){
         this.userId = id;
@@ -34,7 +40,42 @@ public class OnlineUser implements Serializable{
     public OnlineUser() {
         address = new Address();
     }
+
+   /* public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getZip() {
+        return zip;
+    }
+
+    public void setZip(int zip) {
+        this.zip = zip;
+    }*/
+    
+  
    
+    
     
     public Address getAddress() {
         return address;
@@ -135,6 +176,16 @@ public class OnlineUser implements Serializable{
         toReturn.append( Orders.surroundWithQuotes( firstName + " " + lastName ) );
         
         toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "firstname" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes( firstName  ) );
+        
+         toReturn.append( "," );
+        toReturn.append( Orders.surroundWithQuotes( "lastname" ) );
+        toReturn.append( ":" );
+        toReturn.append( Orders.surroundWithQuotes(  lastName ) );
+        
+        toReturn.append( "," );
         toReturn.append( Orders.surroundWithQuotes( "email" ) );
         toReturn.append( ":" );
         toReturn.append( Orders.surroundWithQuotes( email ) );
@@ -142,17 +193,26 @@ public class OnlineUser implements Serializable{
         toReturn.append( "," );
         toReturn.append( Orders.surroundWithQuotes( "admin" ) );
         toReturn.append( ":" );
-        toReturn.append( Orders.surroundWithQuotes( isAdmin + "" ) );
+        toReturn.append(  isAdmin );
+        toReturn.append("");
 
         toReturn.append( "," );
         toReturn.append( Orders.surroundWithQuotes( "banned" ) );
         toReturn.append( ":" );
         toReturn.append( Orders.surroundWithQuotes( isBanned + "" ) );
-        
+
+        if ( address != null )
+        {
+            toReturn.append( "," );
+            toReturn.append( Orders.surroundWithQuotes( "address" ) );
+            toReturn.append( ":" );
+            toReturn.append( address.toString() );
+        }
+
         toReturn.append( "}" );
         return toReturn.toString();
     }
 
+
     
 }
-

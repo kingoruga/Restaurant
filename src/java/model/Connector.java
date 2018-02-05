@@ -7,7 +7,6 @@
 package model;
 
 
-import controller.UserController;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,8 +30,8 @@ import java.util.Date;
 public class Connector {
 
     Connection conn;
-    OnlineUser user;
-    UserController response = new UserController();
+
+
 
     public Connector() {
         try {
@@ -43,14 +42,14 @@ public class Connector {
         }
     }
 
-     public List<OnlineUser> getAllUsers(){
+    public List<OnlineUser> getAllUsers(){
         List<OnlineUser> users = new ArrayList<>();
        
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * from Online_user");
             while(rs.next()){
-                user = new OnlineUser();
+                OnlineUser user = new OnlineUser();
                 user.setUserId(rs.getInt(1));
                 user.setFirstName(rs.getString(2));
                 user.setLastName(rs.getString(3));
@@ -131,7 +130,7 @@ public class Connector {
         return false;
     }
 
-   public void changePasswordQuery(String cmd, String password) {
+public void changePasswordQuery(String cmd, String password) {
         try (PreparedStatement pstmt = conn.prepareStatement("Update Online_user set password = ? where email=?")) {
             pstmt.setString(1, password);
             pstmt.setString(2, cmd);
@@ -145,6 +144,7 @@ public class Connector {
     }
 
     public OnlineUser loginQuery(String email, String password) {
+        OnlineUser user = null;
         int userid=0;
         String firstName = " ";
         String lastName = "";
@@ -169,7 +169,15 @@ public class Connector {
             
             if (pw.equals(password) && status.equals("Enabled")) {
                 Address address = getAddressById(addressId);
-                user = new OnlineUser(userid,firstName,lastName,isAdmin, email, addressId, status); 
+                user = new OnlineUser();
+                user.setUserId(userid);
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setIsAdmin(isAdmin.equals("Yes"));
+                user.setEmail(email);
+                user.setAddressId(addressId);
+                user.setIsBanned(status.equals("Disabled"));
+                
                 user.setAddress(address);
             }
             else {
@@ -201,14 +209,14 @@ public class Connector {
             int count = pstmt.executeUpdate();
 
             if (count == 1) {
-                int admin = 1;
+                String admin = "No";
                 String status = "Enabled";
                 PreparedStatement pstmt1 = conn.prepareStatement
                   ("Insert into ONLINE_USER (first_name, last_name, is_admin, password, email, address_id, status ) "
-                          + "values (?,?,?,?,?,(Select address_id from address where street=? and zip_code=?),?)"); //password will be encrypted in web app
+                          + "values (?,?,?,?,?,(Select address_id from address where street=? and zip_code=? and ROWNUM <= 1 order by address_id desc),?)"); //password will be encrypted in web app
                 pstmt1.setString(1, fname);
                 pstmt1.setString(2, lname);
-                pstmt1.setInt(3, admin);
+                pstmt1.setString(3, admin);
                 pstmt1.setString(4, passWrd);
                 pstmt1.setString(5, email);
                 pstmt1.setString(6, strAddress);
@@ -220,7 +228,7 @@ public class Connector {
                     return true;
             }
         } catch (SQLException ex) {
-            System.out.println("Unable to Register");
+            System.out.println("Unable to Register\n" + ex.getMessage() );
         }
         return false;
     }
@@ -286,7 +294,7 @@ public class Connector {
 
         // get the users zipcode
         int zipcode = 0;
-
+        System.out.println( email );
         try {
             PreparedStatement pstmt
                     = conn.prepareStatement("select a.zip_code "
@@ -299,6 +307,7 @@ public class Connector {
                 zipcode = result.getInt("zip_code");
             }
         } catch (SQLException se) {
+            System.out.println( se.getMessage() );
         }
 
         // get the food
@@ -306,7 +315,7 @@ public class Connector {
 
         try {
             PreparedStatement pstmt
-                    = conn.prepareStatement("select f.food_item_id, f.name, f.description, f.price, f.type, f.is_veg "
+                    = conn.prepareStatement("select f.food_item_id, f.name, f.description, f.price, f.type, f.is_veg,f.image "
                     + "from food_item f, availability a "
                     + "where f.FOOD_ITEM_ID = a.FOOD_ITEM_ID "
                     + "and a.zip_code = ?");
@@ -314,17 +323,18 @@ public class Connector {
             ResultSet result = pstmt.executeQuery();
             while (result.next()) {
                 FoodItem food = new FoodItem();
-                int id = Integer.parseInt(result.getString("food_item_id"));
                 food.setFoodItemId(result.getInt("food_item_id"));
                 food.setName(result.getString("name"));
                 food.setDescription(result.getString("description"));
                 food.setPrice(result.getFloat("price"));
                 food.setType(result.getString("type"));
                 food.setIsVeg(result.getString("is_veg").equalsIgnoreCase("yes"));
+                food.setImage(result.getString("image"));
                 foods.add(food);
             }
 
         } catch (SQLException ex) {
+            System.out.println( ex.getMessage() );
         }
 
         return foods;
@@ -524,7 +534,7 @@ public class Connector {
                         rs.getFloat( "price" ),
                         rs.getString( "type" ),
                         rs.getString( "is_veg" ).equalsIgnoreCase( "yes" ),
-                        "",
+                        rs.getString("image"),
                         a
                 );
                 items.add( foodItem );
@@ -713,7 +723,7 @@ public class Connector {
             for(Map.Entry<FoodItem, Integer> entry : items.entrySet()) {
                 pstmt = conn.prepareStatement("INSERT INTO " +
                         "ORDER_ITEMS (order_id, food_item_id, quantity)" +
-                        "VALUES( (SELECT order_id FROM orders WHERE price=? AND order_date=? AND user_id=? and ROWNUM = 1), ?, ?)");
+                        "VALUES( (SELECT order_id FROM orders WHERE price=? AND order_date=? AND user_id=? ORDER BY order_id desc limit 1), ?, ?)");
 
                 pstmt.setDouble(1, order.getPrice());
                 pstmt.setDate(2, new java.sql.Date(orderDate.getTime()));
@@ -725,7 +735,7 @@ public class Connector {
 
 
         } catch (Exception e) {
-            System.out.println("Order failed.");
+            System.out.println("Order failed.\n" + e.getMessage() );
         }
     }
     
@@ -773,8 +783,7 @@ public class Connector {
         }
     }
     
-    
-    
    
 }
+
 

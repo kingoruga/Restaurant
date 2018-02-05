@@ -1,13 +1,11 @@
 
 package model;
-import static model.Orders.surroundWithQuotes;
 import java.io.Serializable;
+import static model.Orders.surroundWithQuotes;
 
-public class Address implements Serializable {
-
+public class Address implements Serializable{
     private int addressId;
     private String street1;
-    private String street2;
     private String city;
     private String state;
     private String zip;
@@ -29,13 +27,7 @@ public class Address implements Serializable {
         this.street1 = street1;
     }
 
-    public String getStreet2() {
-        return street2;
-    }
 
-    public void setStreet2(String street2) {
-        this.street2 = street2;
-    }
 
     public String getCity() {
         return city;
@@ -65,7 +57,17 @@ public class Address implements Serializable {
         return isDeliverable;
     }
     
-    
+
+
+    /*
+    private int AddressId;
+    private String Street1;
+    private String Street2;
+    private String City;
+    private String State;
+    private String Zip;
+    private boolean IsDeliverable;
+    */
     @Override
     public String toString()
     {
@@ -76,11 +78,17 @@ public class Address implements Serializable {
         toReturn.append( surroundWithQuotes( Integer.toString(addressId) ) );
         
         toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "street" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( street1 ) );
+        
+
+        toReturn.append( "," );
         toReturn.append( surroundWithQuotes( "city" ) );
         toReturn.append( ":" );
         toReturn.append( surroundWithQuotes( city ) );
-        
-        
+
+
         toReturn.append( "," );
         toReturn.append( surroundWithQuotes( "state" ) );
         toReturn.append( ":" );
@@ -100,5 +108,5 @@ public class Address implements Serializable {
         this.isDeliverable = isDeliverable;
     }
 
-
 }
+

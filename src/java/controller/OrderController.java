@@ -5,8 +5,13 @@
  */
 package controller;
 
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import model.Connector;
+import model.OnlineUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,25 +22,40 @@ import org.springframework.web.servlet.ModelAndView;
     The col parameter is used by the controller to determine the exact method
         to use to pass along the list of orders to the view.
 */
-//@Controller
+@Controller
 @RequestMapping(value="/manageOrders.htm")
 public class OrderController 
 {
     @RequestMapping
-    public ModelAndView getOrdersBy( @RequestParam(value="col",required=false,defaultValue="") String columnName )
+    public ModelAndView getOrdersBy( HttpSession session, @RequestParam(value="col",required=false,defaultValue="") String columnName, @ModelAttribute("user") OnlineUser user )
     {
+        Map<String,Object> model = new HashMap<>();
+        model.put( "user" , session.getAttribute( "user" ) );
+        if ( model.get( "user" ) == null )
+        {
+            model.put("user" ,"{}" );
+        }
+        
         //verify that columnName is valid
         switch (columnName) {
             case "price":
             case "order_id":
             case "payment_type":
-                return new ModelAndView( "manageOrders" , "orderList" , new Connector().selectOrdersSortColumn( columnName ) );
+                model.put( "orderList" , new Connector().selectOrdersSortColumn( columnName ) );
+                break;
             case "email":
             case "last_name":
-                return new ModelAndView( "manageOrders" , "orderList" , new Connector().selectOrdersSortCustomerColumn( columnName ) );
+                model.put( "orderList" , new Connector().selectOrdersSortCustomerColumn( columnName ) );
+                break;
             default:
-                return new ModelAndView( "manageOrders" , "orderList" , new Connector().selectOrdersSortAddressZip() );
+                model.put( "orderList" , new Connector().selectOrdersSortAddressZip() );
+                break;
         }
+        
+         if(user.getIsAdmin()){
+             return new ModelAndView( "manageOrders" , "model" , model  );
+        }
+        return new ModelAndView( "unauthorized" );
     }
     
 }

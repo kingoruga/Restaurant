@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpSession;
 import model.Connector;
 import model.FoodItem;
+import model.OnlineUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +27,6 @@ public class AreaManagementController
     {
         Connector dataConnector = new Connector();
         dataConnector.removeZipFromServiceArea( zipCode );
-        //return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
         return "redirect:/manageAreas.htm";
     }
     
@@ -33,15 +35,20 @@ public class AreaManagementController
     {
         Connector dataConnector = new Connector();
         dataConnector.addZipToServiceArea( zipCode );
-        //return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
         return "redirect:/manageAreas.htm";
     }
     
     @RequestMapping( value={"/manageAreas.htm"} ,method=RequestMethod.GET )
-    public ModelAndView allArea()
+    public ModelAndView allArea( HttpSession session, @ModelAttribute("user") OnlineUser user )
     {
         Connector dataConnector = new Connector();
-        return new ModelAndView( "manageAreas" , "areaList" , dataConnector.getAreas() );
+        Map<String,Object> model = new HashMap<>();
+        model.put( "user" , session.getAttribute( "user" ) != null ? session.getAttribute( "user" ) : "{}");
+        model.put( "areaList" , dataConnector.getAreas() );
+        if(user.getIsAdmin()){
+             return new ModelAndView( "manageAreas" , "model" , model  );
+        }
+        return new ModelAndView( "unauthorized" );
     }
     
     private List convertFoodToJson( List items )
@@ -70,7 +77,7 @@ public class AreaManagementController
     }
     
     @RequestMapping( value="/manageAreaPackages.htm", method=RequestMethod.GET )
-    public ModelAndView packagesInArea( @RequestParam("zip") int zipCode )
+    public ModelAndView packagesInArea( HttpSession session, @RequestParam("zip") int zipCode )
     {
         Connector dataConnector = new Connector();
         //passing along multiple things for the model,so using a map
@@ -88,6 +95,7 @@ public class AreaManagementController
             .map( str -> "\"" + str.toString() + "\"" ) 
             .collect( Collectors.toList() ) 
         );
+        model.put( "user" , session.getAttribute( "user" ) != null ? session.getAttribute( "user" ) : "{}");
         return new ModelAndView( "manageAreaPackages" , "model" , model );
     }
     

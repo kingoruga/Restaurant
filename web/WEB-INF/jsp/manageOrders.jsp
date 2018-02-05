@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <link rel="stylesheet" href="css/nav.css" />
     </head>
     <body>
         <div id="mainContainer">
@@ -32,19 +33,16 @@
         <script src="js/Navbar.js" type="text/babel" ></script>
         <script src="js/manageOrders.js" type="text/babel" ></script>
         <script type="text/babel">
-        //change the following to test out whether the navbar changes correctly
-        var testUser = {};
-        testUser.email = "tester@email.com";
-        testUser.isAdmin = true;
-        //this changes what gets shown on the navbar with My Orders
-        testUser.orderCount = 10;
+        //get the user from the model that the controller passed
+        var user = ${model.get("user")};
+        console.log( user );
         //get the order list from what the java controller passed
-        var ordersList = ${orderList};
+        var ordersList = ${model.get("orderList")};
         console.log( ordersList );
 
         React.render(
                 <div>
-                    <NavBar user={testUser} />
+                    <NavBar user={user} />
                     <OrderTable orders={ordersList} />
                 </div>
             , document.getElementById( "mainContainer" )

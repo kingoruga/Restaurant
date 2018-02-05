@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <link rel="stylesheet" href="css/nav.css" />
     </head>
     <body>
         <div id="mainContainer">
@@ -33,9 +34,8 @@
         <script src="js/manageAreaPackages.js" type="text/babel" ></script>
         <script type="text/babel">
         //change the following to test out whether the navbar changes correctly
-        var testUser = {};
-        testUser.email = "tester@email.com";
-        testUser.isAdmin = true;
+        var user = ${model.get("user")};
+        console.log( user );
 
         //get the passed along things from the model passed by the controller
         //  java uses the toString method of these objects to put them on the page
@@ -45,7 +45,7 @@
         
         React.render(
                 <div>
-                    <NavBar user={testUser} />
+                    <NavBar user={user} />
                     <h3>Packages In {zipCode}</h3>
                     <AreaItemTable items={foodAvailable} />
                     <h4>Manage Packages</h4>

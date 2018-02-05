@@ -14,6 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="./css/bootstrap.min.css" />
+         <link rel="stylesheet" href="css/nav.css" />
+         <link rel="stylesheet" href="css/manageusers.css" />
         <style>
             /* add stylesheet */
             h4 { margin-top: 24px; }
@@ -30,7 +32,7 @@
             </div>
             <p>Register as a customer. All fields are required to be filled out for successful registration.</p>
             <hr>
-            <form:form method="POST" commandName="userModel">
+            <form:form method="POST" modelAttribute="user" action="registerProcess.htm">
 
                 <h4>Login information</h4>
                 <div class="form-group">
@@ -59,16 +61,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="address">Street address</label>
-                        <form:input path="address.street1" required="true" type="text" class="form-control" id="address" placeholder="1234 Main St" />
+                        <form:input path="street" required="true" type="text" class="form-control" id="address" placeholder="1234 Main St" />
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="city">City</label>
-                        <form:input path="address.city" required="true" type="text" class="form-control" id="city" />
+                        <form:input path="city" required="true" type="text" class="form-control" id="city" />
                     </div>
                     <div class="form-group col-md-2">
                         <label for="state">State</label>
-                        <form:select path="address.state" id="state" class="form-control">
+                        <form:select path="state" id="state" class="form-control">
                             <option value="AK">Alaska</option>
                             <option value="AL">Alabama</option>
                             <option value="AR">Arkansas</option>
@@ -125,14 +127,16 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="zip">Zip</label>
-                        <form:input path="address.zip" required="true" type="number" class="form-control" id="zip" />
+                        <form:input path="zip" required="true" type="number" class="form-control" id="zip" />
                     </div>
                 </div>
                 <hr />
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                <button type="submit" class="btn btn-primary btn-block" >Register</button>
             </form:form>
+                
         </div>
         </div>
+       
         <script>
             var NavBar;
         </script>
@@ -140,7 +144,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js" crossorigin="anonymous"></script>
         <script src="./js/Navbar.js" type="text/babel" ></script>
         <script type="text/babel">
-            var user = eval(${user});
+            var user = eval(${userObj});
             React.render(
                 <div>
                     <NavBar user={user} />

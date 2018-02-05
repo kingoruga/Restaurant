@@ -15,7 +15,7 @@
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-
+         <link rel="stylesheet" href="css/nav.css" />
          <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 
     </head>
@@ -70,23 +70,15 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/reactstrap/4.8.0/reactstrap.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-        <script src="js/react.min.js"></script>
-        <script src="js/manageUser.js"></script>
-        <script src="js/Navbar.js" type="text/babel" ></script>
+        <script src="./js/react.min.js"></script>
+        <script src="./js/Navbar.js" type="text/babel" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js"></script>   
         <script type="text/babel">
-       
-          
-
-        var testUser = {};
-        testUser.email = "tester@email.com";
-        testUser.isAdmin = true;
-        
-        
-       React.render(
-                     <NavBar user={testUser} />
-                ,document.getElementById("mainContainer")
-        );
+        var testUser = ${user};
+        React.render(                    
+                    <NavBar user={testUser} />
+            ,document.getElementById("mainContainer")
+         );
         </script>
     </body>
 </html>

@@ -1,9 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Orders implements Serializable {
+public class Orders {
     private int OrderId;
     private int UserId;
     private int AddressId;
@@ -139,7 +138,7 @@ public class Orders implements Serializable {
         return toReturn.toString();
     }
     
-    @Override
+  @Override
     public String toString()
     {
         StringBuilder toReturn = new StringBuilder();
@@ -189,8 +188,19 @@ public class Orders implements Serializable {
             toReturn.append( orderAddress.toString() );
         }
         
+        if ( user != null )
+        {
+            toReturn.append( "," );
+            toReturn.append( surroundWithQuotes( "user" ) );
+            toReturn.append( ":" );
+            toReturn.append( user.toString() );
+        }
+        
         toReturn.append( "}" );
         return toReturn.toString();
     }
+
+
+    
 
 }

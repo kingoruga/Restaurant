@@ -15,21 +15,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
          <link rel="stylesheet" href="css/manageusers.css" />
+          <link rel="stylesheet" href="css/nav.css" />
 
     </head>
     <body>
          <div id="mainContainer"></div>
-         <div id="my-div">
-      
-        <form:form class="form-group"  method="GET"  action="changepassword.htm"  modelAttribute="user" > 
-                         <form:label path="email">Enter User Email:</form:label> 
-                         <form:input path="email" />
-                         <!--input type="text" name="email"  class="form-control"  required={true}/> <br-->
-                         <br><form:label path="password">Enter New password:</form:label> 
-                         <form:password path="password" />
-                        <!--input type="password" name="password"  class="form-control"  required={true}/> <br-->
-                        <br><br><input type="submit" value="Submit" class="btn btn-primary" onclick="showToast()"/> 
-        </form:form>
+         
+         <div class="container">
+                <form:form method="GET" modelAttribute="user" action="changepassword.htm">
+                    <div class="form-signin">
+                        <h2 class="form-signin-heading">Please enter user details to change password</h2>
+                        <label class="sr-only"></label>
+                        <form:input
+                                path="email" type="email" class="form-control" id="email" name="email"
+                                required="true"
+                                aria-describedby="emailHelp" placeholder="Enter email"/>
+                    <!--/div>
+                    <div class="form-signin"-->
+                        <label class="sr-only"></label>
+                        <form:password path="password" class="form-control"
+                                       required="true"
+                                       placeholder="Password" id="password" name="password" />
+                        
+                         <button type="submit" class="btn btn-lg btn-primary btn-block" id="submitBtn" onclick="showToast()">Submit</button>
+                          <br><div id="errorMsg" >${error}</div>
+                    </div>               
+                   
+                </form:form>
+            </div>
                         
                         <div id="toast">The password has been updated</div>
                         
@@ -60,13 +73,10 @@
        
           
 
-        var testUser = {};
-        testUser.email = "tester@email.com";
-        testUser.isAdmin = true;
-        
-        
+        var user = ${user};
+
        React.render(
-                     <NavBar user={testUser} />
+                     <NavBar user={user} />
                 ,document.getElementById("mainContainer")
         );
         </script>

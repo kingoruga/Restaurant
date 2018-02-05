@@ -1,8 +1,8 @@
 var UserRow = React.createClass({
     render: function(){
         return 
-         
-         ;
+           
+        ;
     }
 
 });
@@ -11,16 +11,16 @@ var UserRow = React.createClass({
 
     eachUser: function( user, index ) 
      { 
-            return 
-         
-         ;
+        return 
+           
+        ; 
     }, 
  
   
     render: function (){
-           return 
-         
-         ;
+        return
+             
+        ;
     },
 
 

@@ -17,9 +17,8 @@
 
 
 
-
     <mvc:annotation-driven/>
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="com.syntel.controller"/>
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -28,22 +27,23 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-                <prop key="index.htm">indexController</prop>
                 <prop key="menuView.htm">menuController</prop>
-
-                <prop key="register.htm">registerController</prop>
-
-                <prop key="getFoodItemsInArea.htm">menuController</prop>
-                <prop key="getFoodItemsForUser.htm">menuController</prop>
                 <prop key="myOrders.htm">myOrdersController</prop>
-
-                <prop key="login.htm">loginController</prop>
-                <prop key="logout.htm">logoutController</prop>
-                <prop key="myOrders.htm">myOrdersController</prop>
+                <prop key="managePackages.htm">foodController</prop>  
+                <prop key="deletefood.htm">foodController</prop>
+                <prop key="createfood.htm">foodController</prop>
+                <prop key="availability.htm">foodController</prop>                  
+                <prop key="commit.htm">foodController</prop>
+                <prop key="findfood.htm">foodController</prop>
+                <prop key="editfood.htm">foodController</prop>
+                <prop key="editav.htm">foodController</prop>
+               
+                <!--prop key="registration.htm">registrationController</prop-->
+                
                 <prop key="manageOrders.htm">orderManageController</prop>
-                <!--prop key="/area/*">areaManageController</prop-->
-                <!--prop key="manageAreaPackages.htm">areaManageController</prop>
-                <prop key="manageAreas.htm">areaManageController</prop-->
+                <prop key="/area/*">areaManageController</prop>
+                <prop key="manageAreaPackages.htm">areaManageController</prop>
+                <prop key="manageAreas.htm">areaManageController</prop>
             </props>
         </property>
     </bean>
@@ -58,41 +58,33 @@
     <!--
     The index controller.
     -->
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
-
-    <bean name="menuController"
+    <!--bean name="menuController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="menuView" />
-    <bean name="registerController"
-            class="controller.RegisterController" />
-
-    <bean name="myOrdersController"
+            p:viewName="menuView" /-->
+    <!--bean name="myOrdersController"
             class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-            p:viewName="myOrders" />
-    
-
-    <bean name="loginController"
-            class="controller.LoginController" />
-    <bean name="logoutController"
-            class="controller.LogoutController" />
-    <bean name="myOrdersController"
-            class="controller.MyOrdersController" />
+            p:viewName="myOrders" /-->
+    <!--bean name="registrationController"
+            class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+            p:viewName="registration" /-->
+  
 
    
     
     <bean name="orderManageController"
       class="controller.OrderController" />
     
-    <!--bean name="areaManageController"
-      class="controller.AreaManagementController" /-->
+    <bean name="areaManageController"
+      class="controller.AreaManagementController" />
     
-
     <bean name="menuController"
             class="controller.FoodItemController" />
     
-
-
+    <bean name="myOrdersController"
+        class="controller.MyOrdersController" />
+     
+     <bean name="foodController"
+          class="controller.PackageController" />  
+    
 </beans>
 

@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <link rel="stylesheet" href="css/nav.css" />
     </head>
     <body>
         <div id="mainContainer">
@@ -33,15 +34,12 @@
         <script src="js/menuView.js" type="text/babel" ></script>
         <script type="text/babel">
         //change the following to test out whether the navbar changes correctly
-        var testUser = {};
-        testUser.email = "tester@email.com";
-        testUser.isAdmin = true;
-        testUser.orderInProgress = true;
+        var user = ${model.get("user")};
         //get the items from the model passed by the controller
-        var itemsList = ${items};
+        var itemsList = ${model.get("items")};
         React.render(
                 <div>
-                    <NavBar user={testUser} />
+                    <NavBar user={user} />
                     <ItemTable items={itemsList} />
                 </div>
             , document.getElementById( "mainContainer" )

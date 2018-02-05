@@ -1,19 +1,20 @@
 var AddressForm = React.createClass({
    render: function() {
+       var address = this.props.address;
        return (
             <div>
                 <div className="form-row">
                     <div className="form-group col-md-5">
                         <label for="address">Street address</label>
-                        <input required type="text" className="form-control" id="address" placeholder="1234 Main St" />
+                        <input required type="text" defaultValue={address.street} className="form-control" name="street" id="address" placeholder="1234 Main St" />
                     </div>
                     <div className="form-group col-md-3">
                         <label for="city">City</label>
-                        <input required type="text" className="form-control" id="city" />
+                        <input required type="text" defaultValue={address.city} className="form-control" name="city" id="city" />
                     </div>
                     <div className="form-group col-md-2">
                         <label for="state">State</label>
-                        <select id="state" className="form-control">
+                        <select id="state" defaultValue={address.state} name="state" className="form-control">
                             <option value="AK">Alaska</option>
                             <option value="AL">Alabama</option>
                             <option value="AR">Arkansas</option>
@@ -70,7 +71,7 @@ var AddressForm = React.createClass({
                     </div>
                     <div className="form-group col-md-2">
                         <label for="zip">Zip</label>
-                        <input required type="number" className="form-control" id="zip" />
+                        <input required type="number" defaultValue={address.zip} name="zip" className="form-control" id="zip" />
                     </div>
                 </div>
                 
@@ -84,15 +85,38 @@ var OrderDropdown = React.createClass({
         return (
             <div className="container dropdown">
                 <p>Current {this.props.title}: </p>
-                <form>
+                <form method="POST">
                     {this.props.children}
-                    <input type='hidden' id='orderId' value={this.props.orderId} />
+                    <input type="hidden" name="action" value={this.props.action} />
+                    <input type='hidden' name='orderId' value={this.props.orderId} />
                     <button>Change</button>
                 </form>
             </div>
         );
     }
 });
+
+var OrderItem = React.createClass({
+    render: function() {
+        var food = this.props.item;
+        var amount = this.props.amount > 1 ? "(" + this.props.amount + "x)" : "";
+        
+        var veg = food.is_veg === "false" ? "not vegetarian" : "vegetarian"
+        return (
+            <div className="row">
+                <img className="col-sm-2" alt="meal-image" src={food.image} width="64" height="90" />
+                <div className="col-md-10 h-50">
+                    <div className='space'>
+                        <div className="row"><h4>{food.name} - {food.type} {amount}</h4></div>
+                        <div className="row">
+                        <p>{food.description} <i>({veg})</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+})
 
 var Order = React.createClass({
     
@@ -144,10 +168,10 @@ var Order = React.createClass({
             // Extend delivery date
             case 1:
                 return (
-                    <OrderDropdown title='Delivery date' orderId='1000'>
+                    <OrderDropdown title='Delivery date' orderId={this.state.order.orderid} action="DATE">
                         <div className="form-row">
                             <div className="form-group col-md-5">
-                                <input required type="date" className="form-control" id="date" placeholder="9/21/2017" />
+                                <input required className="form-control" id="date" name="date" defaultValue={this.state.order.deliveryDate} />
                             </div>
                         </div>
                     </OrderDropdown>
@@ -156,7 +180,7 @@ var Order = React.createClass({
             // Modify meal options
             case 2: 
                 return (
-                    <OrderDropdown title='Meal option' orderId='1000'>
+                    <OrderDropdown title='Meal option' orderId={this.state.order.orderid}>
                         <div className="form-group col-md-2">
                             <select id="mealOption" className="form-control">
                                 <option value="br">Breakfast</option>
@@ -170,8 +194,8 @@ var Order = React.createClass({
             // Modify delivery address
             case 3:
                 return (
-                    <OrderDropdown title='Address information' orderId='1000'>
-                        <AddressForm />
+                    <OrderDropdown title='Address information' orderId={this.state.order.orderid} action="ADDRESS">
+                        <AddressForm address={this.state.order.address} />
                     </OrderDropdown>
                 );
         
@@ -181,40 +205,31 @@ var Order = React.createClass({
     },
     
     render: function() {
-        
-        var food = this.state.order.items[0];
-        var orderDate = this.state.order.orderDate;
 
-        var daysRemaining = new Date(this.state.order.deliveryDate)
-        var timeDiff = Math.abs(daysRemaining.getTime() - (new Date()).getTime());
+        var orderDate = new Date(this.state.order.orderDate.split(' ')[0]);
+        var orderDateStr = orderDate.getMonth()+1 + "/" + orderDate.getDate();
+        
+        var deliveryDate = new Date(this.state.order.deliveryDate.split(' ')[0]);
+        var deliveryDateStr = deliveryDate.getMonth()+1 + "/" + deliveryDate.getDate();
+
+        var timeDiff = Math.abs(deliveryDate.getTime() - (new Date()).getTime());
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        diffDays = diffDays >= 1 ? diffDays : "0";
         
         return (
             <div className="container item">
-                <div className="row">
-                    <img className="col-sm-2" alt="meal-image" />
-                    <div className="col-md-10 h-50">
-                        <div className='space'>
-                            <div className="row">
-                                <h4>{food.type}</h4>
-                            </div>
-                            <div className="row">
-                                <p>{food.description}</p>
-                            </div>
-                            <div className="row">
-                                <span className='align-text-bottom align-bottom'>
-                                    <span>Day ordered: {orderDate}</span>, <span>Days remaining: {diffDays}</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                { this.state.order.items.map((item, index) => <OrderItem item={item} key={index} amount={this.props.amounts[item.food_item_id]} />) }
+                <div className="row justify-content-md-center">
+                    <span>Day ordered: {orderDateStr}</span>,&nbsp;
+                    <span>Day of delivery: {deliveryDateStr}</span>,&nbsp;
+                    <span>Days remaining: {diffDays}</span>
                 </div>
                 <div className="row justify-content-md-center">
                     <a onClick={(e) => this.toggleDropdown(e, 1)} className="col-md-3 btn btn-default" href="#" role="button">Extend delivery date</a>
-                    <a onClick={(e) => this.toggleDropdown(e, 2)} className="col-md-3 btn btn-default" href="#" role="button">Modify meal options</a>
                     <a onClick={(e) => this.toggleDropdown(e, 3)} className="col-md-3 btn btn-default" href="#" role="button">Modify delivery address</a>
                 </div>
                 {this.getDropdown()}
+                <hr />
             </div>
         );
     }
@@ -223,8 +238,9 @@ var Order = React.createClass({
 var OrderPage = React.createClass({
         
     render: function() {
+        
         var orders = this.props.orders.map((o, i) => {
-            return (<Order order={o} key={i} />);
+            return (<Order order={o} key={i} amounts={this.props.amounts[o.orderid]} />);
         });
 
         return (
@@ -247,5 +263,5 @@ var OrderPage = React.createClass({
     }
 });
 
-React.render(<OrderPage orders={orders} />,
+React.render(<OrderPage orders={orders} amounts={amounts} />,
         document.getElementById('react-container'));

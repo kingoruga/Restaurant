@@ -53,7 +53,7 @@ public class OnlineUserDAOImpl implements OnlineUserDAO {
         Object[] secondParams = {
                 user.getFirstName(), user.getLastName(), "no",
                 user.getPassword(), user.getEmail(), key,
-                user.isIsBanned() ? "Disabled" : "Enabled" };
+                user.getIsBanned() ? "Disabled" : "Enabled" };
         jdbcTemplate.update(p_query, secondParams);
         
         return true;
@@ -91,7 +91,7 @@ public class OnlineUserDAOImpl implements OnlineUserDAO {
     public List<Orders> getOrdersFor(OnlineUser user) {
         
         // Get user information
-        String p_query = "select * from orders where user_id=?";
+        String p_query = "select * from orders where user_id=? order by delivery_date";
         Object[] params = { user.getUserId() };
         int[] args = { Types.NUMERIC };
         OrdersRowMapper rowMapper = new OrdersRowMapper();

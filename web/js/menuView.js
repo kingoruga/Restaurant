@@ -11,9 +11,10 @@ ItemRow = React.createClass({
                 <td>{this.props.item.price}</td>
                 <td>{this.props.item.des}</td>
                 <td>{this.props.item.veg}</td>
-                <td>{this.props.item.image}</td>
-                <td>   <button type="button">Start my Order</button> </td>  
-             </tr>    
+                <td><img src={this.props.item.image} alt="Food" width="64" height="64"/></td>
+            
+             </tr> 
+             
         );
    },
     
@@ -24,9 +25,10 @@ ItemRow = React.createClass({
                 <td>{this.props.item.price}</td>
                 <td>{this.props.item.des}</td>
                 <td>{this.props.item.veg}</td>
-                <td>{this.props.item.image}</td>
-                <td>   <button type="button">Click here to log in and start ordering</button></td>
+                <td><img src={this.props.item.image} alt="Food"  width="64" height="64"/></td>
+               
              </tr>    
+              
         );
     },
     
@@ -37,8 +39,8 @@ ItemRow = React.createClass({
                 <td>{this.props.item.price}</td>
                 <td>{this.props.item.des}</td>
                 <td>{this.props.item.veg}</td>
-                <td>{this.props.item.image}</td>
-                <td>   <button type="button">Add to Order</button></td>
+                <td><img src={this.props.item.image} alt="Food"  width="64" height="64"/></td>
+                
              </tr>    
         );
     },

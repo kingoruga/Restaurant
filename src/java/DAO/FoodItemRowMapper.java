@@ -26,7 +26,7 @@ public class FoodItemRowMapper implements RowMapper {
         f.setPrice(rs.getFloat(4));
         f.setType(rs.getString(5));
         f.setIsVeg(rs.getString(6).equals("1"));
-        // f.setImage(rs.getBlob(7))
+        f.setImage(rs.getString(7));
         
         return f;
     }

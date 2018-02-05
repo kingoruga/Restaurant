@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 package model;
-import static model.Orders.surroundWithQuotes;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import static model.Orders.surroundWithQuotes;
+
+/**
+ *
+ * @author syntel
+ */
 public class FoodItem {
 
     private int FoodItemId;
@@ -127,6 +132,11 @@ public class FoodItem {
         toReturn.append( surroundWithQuotes( "type" ) );
         toReturn.append( ":" );
         toReturn.append( surroundWithQuotes( Type ) );
+        
+        toReturn.append( "," );
+        toReturn.append( surroundWithQuotes( "image" ) );
+        toReturn.append( ":" );
+        toReturn.append( surroundWithQuotes( Image ) );
         
         toReturn.append( "," );
         toReturn.append( surroundWithQuotes( "is_veg" ) );
