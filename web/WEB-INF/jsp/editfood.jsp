@@ -71,6 +71,11 @@
                 <td><form:errors path="IsVeg" cssClass="error" /></td>
             </tr> 
             <tr> 
+                <td>Image URL :</td> 
+                <td><form:input path="Image" value="${fooditem.image}" /></td> 
+                <td><form:errors path="Image" cssClass="error" /></td>
+            </tr> 
+            <tr> 
                 <td colspan="2">
                 <input type="submit" value="Next"></td> 
             </tr> 

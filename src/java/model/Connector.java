@@ -213,7 +213,7 @@ public void changePasswordQuery(String cmd, String password) {
                 String status = "Enabled";
                 PreparedStatement pstmt1 = conn.prepareStatement
                   ("Insert into ONLINE_USER (first_name, last_name, is_admin, password, email, address_id, status ) "
-                          + "values (?,?,?,?,?,(Select address_id from address where street=? and zip_code=? and ROWNUM <= 1 order by address_id desc),?)"); //password will be encrypted in web app
+                          + "values (?,?,?,?,?,(Select address_id from address where street=? and zip_code=? and ROWNUM <= 1),?)"); //password will be encrypted in web app
                 pstmt1.setString(1, fname);
                 pstmt1.setString(2, lname);
                 pstmt1.setString(3, admin);

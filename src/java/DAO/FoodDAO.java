@@ -41,13 +41,14 @@ public class FoodDAO {
             Object o[]={fitem.getName()};
             int argsTypes[]={Types.VARCHAR};
             RowMapper mapper=new FoodItemRowMapper();
-            List l= jdbcTemplate.query ( "select name,description, price,type,is_veg from food_item where name=?",o,argsTypes,mapper);
+            List l= jdbcTemplate.query ( "select food_item_id,name,description, price,type,is_veg,image from food_item where name=?",o,argsTypes,mapper);
             Iterator it=l.iterator();
             fitem=(FoodItem)it.next(); 
 
+            fitem.createAvailability(new ArrayList<>());
             mapper = new AvailabilityRowMapper();
             Object n[]={fitem.getFoodItemId()};
-            l = jdbcTemplate.query("Select zip_code,time,begin_date,end_date from Availability where food_item_id=?)",n,argsTypes,mapper);
+            l = jdbcTemplate.query("Select zip_code,time,begin_date,end_date from Availability where food_item_id=?",n,argsTypes,mapper);
             it = l.iterator();
 
             while(it.hasNext()){
@@ -79,9 +80,9 @@ public class FoodDAO {
             
             ArrayList<Availability> av = item.getAvailability();
                             
-            String p_query="Insert into Food_item (name,description,price,type,is_veg) values(?,?,?,?,?)";
+            String p_query="Insert into Food_item (name,description,price,type,is_veg,image) values(?,?,?,?,?,?)";
             jdbcTemplate.update(p_query,new Object[]{
-            item.getName(),item.getDescription(),item.getPrice(),item.getType(),item.getIsVeg()});
+            item.getName(),item.getDescription(),item.getPrice(),item.getType(),item.getIsVeg(),item.getImage()});
             
             p_query="Insert into Availability (food_item_id,zip_code,time,begin_date,end_date) values ((select food_item_id from food_item where name=?),?,?,?,?)";
             for(int i=0;i<av.size();i++){
