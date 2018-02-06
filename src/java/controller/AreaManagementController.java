@@ -39,12 +39,13 @@ public class AreaManagementController
     }
     
     @RequestMapping( value={"/manageAreas.htm"} ,method=RequestMethod.GET )
-    public ModelAndView allArea( HttpSession session, @ModelAttribute("user") OnlineUser user )
+    public ModelAndView allArea( HttpSession session )
     {
         Connector dataConnector = new Connector();
         Map<String,Object> model = new HashMap<>();
         model.put( "user" , session.getAttribute( "user" ) != null ? session.getAttribute( "user" ) : "{}");
         model.put( "areaList" , dataConnector.getAreas() );
+        OnlineUser user = (OnlineUser)session.getAttribute("user");
         if(user.getIsAdmin()){
              return new ModelAndView( "manageAreas" , "model" , model  );
         }

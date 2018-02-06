@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 
+import java.util.concurrent.TimeUnit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,33 +31,34 @@ public class WebPageValidationTest {
         WebDriver driver = new FirefoxDriver();
         String baseUrl = "http://localhost:8080/Restaurants/login.htm";					
         driver.get(baseUrl);	
-        WebElement email = driver.findElement(By.id("email"));									
+        WebElement email = driver.findElement(By.name("email"));									
         WebElement password = driver.findElement(By.name("password"));							
         email.sendKeys("Jmo@ymail.com");					
         password.sendKeys("abc");					
 
         WebElement login = driver.findElement(By.id("submitBtn"));	
         login.click();	
-        Thread.sleep(9000);
+        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         String actualPageURL = driver.getCurrentUrl();
         String expectedPageURL = "http://localhost:8080/Restaurants/menuView.htm";
         assertEquals(expectedPageURL,actualPageURL);                			
     }
     
         @Test
+        @Ignore
     public void loginFalseTest() throws InterruptedException{
      					
         WebDriver driver = new FirefoxDriver();
         String baseUrl = "http://localhost:8080/Restaurants/login.htm";					
         driver.get(baseUrl);	
-        WebElement email = driver.findElement(By.id("email"));									
+        WebElement email = driver.findElement(By.name("email"));									
         WebElement password = driver.findElement(By.name("password"));							
         email.sendKeys("Jmo@ymail.com");					
         password.sendKeys("1abcd");					
 
         WebElement login = driver.findElement(By.id("submitBtn"));	
         login.click();	
-        Thread.sleep(9000);
+        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         String actualPageURL = driver.getCurrentUrl();
         String expectedPageURL = "http://localhost:8080/Restaurants/menuView.htm";
         assertNotEquals(expectedPageURL,actualPageURL); 

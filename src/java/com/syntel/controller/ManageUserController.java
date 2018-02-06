@@ -28,12 +28,13 @@ public class ManageUserController {
     
 
     @RequestMapping("/manageUsers.htm")
-    public String manageUsers(HttpSession session,ModelMap model,@ModelAttribute("user") OnlineUser user){
+    public String manageUsers(HttpSession session,ModelMap model){
        // userMgt = new ManageUserDAO();
        Connector con = new Connector();
         List <OnlineUser> users = con.getAllUsers();
         model.put("users", users);
         model.put( "user" , session.getAttribute("user") != null ? session.getAttribute("user") : "{}" );
+        OnlineUser user = (OnlineUser)session.getAttribute("user");
         if(user.getIsAdmin()) {
             return "manageUsers";
         }

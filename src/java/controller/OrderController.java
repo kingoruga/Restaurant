@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class OrderController 
 {
     @RequestMapping
-    public ModelAndView getOrdersBy( HttpSession session, @RequestParam(value="col",required=false,defaultValue="") String columnName, @ModelAttribute("user") OnlineUser user )
+    public ModelAndView getOrdersBy( HttpSession session, @RequestParam(value="col",required=false,defaultValue="") String columnName )
     {
         Map<String,Object> model = new HashMap<>();
         model.put( "user" , session.getAttribute( "user" ) );
@@ -51,6 +51,8 @@ public class OrderController
                 model.put( "orderList" , new Connector().selectOrdersSortAddressZip() );
                 break;
         }
+        
+        OnlineUser user = (OnlineUser)session.getAttribute("user");
         
          if(user.getIsAdmin()){
              return new ModelAndView( "manageOrders" , "model" , model  );

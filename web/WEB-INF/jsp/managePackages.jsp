@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-         <link rel="stylesheet" href="css/nav.css" />
+        <link rel="stylesheet" href="css/nav.css" />
         <script>
         var NavBar;
         var testUser = ${user};       
@@ -32,8 +32,8 @@
 
     <body>    
         <div id="mainContainer"> </div> 
-        <h4><a href="createfood.htm">Create New Food Item</a></h4>
-        <h4><a href="deletefood.htm">Delete Food Item</a></h4>
-        <h4><a href="findfood.htm">Update Food Item</a></h4>
+        <h4><a style="color:rgba(0, 0, 0, .85)" href="createfood.htm">Create New Food Item</a></h4>
+        <h4><a style="color:rgba(0, 0, 0, .85)" href="deletefood.htm">Delete Food Item</a></h4>
+        <h4><a style="color:rgba(0, 0, 0, .85)" href="findfood.htm">Update Food Item</a></h4>
     </body>
 </html>

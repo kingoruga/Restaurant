@@ -39,7 +39,7 @@
                                 <input type="checkbox" value="remember-me"> Remember me
                             </label>
                         </div>
-                         <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+                         <button id="submitBtn" type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
                           <br><div style="color: red">${error}</div>
                     </div>
                    

@@ -30,9 +30,9 @@ import org.springframework.ui.ModelMap;
 @Controller
 public class PackageController {
     
-    private static FoodItem foodItem = null;
+   private static FoodItem foodItem = null;
     
-    @RequestMapping(value = "/createfood.htm", method = RequestMethod.GET)
+   @RequestMapping(value = "/createfood.htm", method = RequestMethod.GET)
    public String food(HttpSession session, Model model){
        model.addAttribute("createfood",new FoodItem());
        model.addAttribute("user" , session.getAttribute( "user" ) != null ? session.getAttribute("user" ) : "{}" );
@@ -55,10 +55,8 @@ public class PackageController {
    
    
    @RequestMapping(value="availability" ,method=RequestMethod.POST)
-    public String addAvailability(@ModelAttribute("availability") Availability av){
-      
-        foodItem.setAvailability(av);
-              
+    public String addAvailability(@ModelAttribute("availability") Availability av){  
+      foodItem.setAvailability(av);          
       return "redirect:commit.htm";
     }
    
@@ -68,25 +66,21 @@ public class PackageController {
    public String commit(Model model, HttpSession session ){
        model.addAttribute("commit",new Availability());
        model.addAttribute( "user" , session.getAttribute( "user" ) != null ? session.getAttribute("user") : "{}" );
-      return "commit";   }   
+      return "commit";   
+   }   
     
     
     @RequestMapping(value="commit" ,method=RequestMethod.POST)
-    public String commitChanges(@ModelAttribute("commit") Availability av){
-      
-                
+    public String commitChanges(@ModelAttribute("commit") Availability av){                 
         ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
         FoodDAO foodDOA=(FoodDAO)ctx.getBean("foodDAO");
-        foodDOA.createFoodQuery(foodItem);        
-        
-        foodItem=null;
-        
-      
+        foodDOA.createFoodQuery(foodItem);              
+        foodItem=null;    
       return "redirect:managePackages.htm";
     }
     
     
-     @RequestMapping(value = "/findfood.htm", method = RequestMethod.GET)
+   @RequestMapping(value = "/findfood.htm", method = RequestMethod.GET)
    public String find(Model model, HttpSession session ){
        model.addAttribute("findfood",new FoodItem());
        model.addAttribute( "user" , session.getAttribute( "user" ) != null ? session.getAttribute("user") : "{}" );
@@ -94,8 +88,7 @@ public class PackageController {
     
     
     @RequestMapping(value="findfood" ,method=RequestMethod.POST)
-    public ModelAndView findFood(@ModelAttribute("findfood") FoodItem fitem){
-      
+    public ModelAndView findFood(@ModelAttribute("findfood") FoodItem fitem){   
         if(foodItem==null){
             ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
             FoodDAO foodDOA=(FoodDAO)ctx.getBean("foodDAO");
@@ -117,26 +110,13 @@ public class PackageController {
        
     }    
     
-      @RequestMapping(value = "/editfood.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/editfood.htm", method = RequestMethod.GET)
     public String edit(Model model , HttpSession session ){
        model.addAttribute("editfood",new FoodItem());
        model.addAttribute( "user" , session.getAttribute( "user" ) != null ? session.getAttribute("user") : "{}" );
-      return "editfood";   }   
+      return "editfood";   
+    }   
     
-    /*
-    @RequestMapping(value="editfood" ,method=RequestMethod.POST)
-    public ModelAndView editFood(@ModelAttribute("editfood") FoodItem fitem){
-      
-                
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
-        FoodDAO foodDAO=(FoodDAO)ctx.getBean("foodDAO");
-        foodDAO.deleteFoodQuery(foodItem);
-        foodDAO.createFoodQuery(fitem);
-        
-      
-      return new ModelAndView("redirect:managePackages.htm");
-    }
-*/
     
     @RequestMapping(value = "/deletefood.htm", method = RequestMethod.GET)
     public String delete(Model model , HttpSession session ){
@@ -148,48 +128,38 @@ public class PackageController {
     
     @RequestMapping(value="deletefood" ,method=RequestMethod.POST)
     public ModelAndView deleteFood(@ModelAttribute("deletefood") FoodItem fitem){
-      
-                
         ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
         FoodDAO foodDAO=(FoodDAO)ctx.getBean("foodDAO");
-        foodDAO.deleteFoodQuery(fitem);  
-        
-      
+        foodDAO.deleteFoodQuery(fitem);     
       return new ModelAndView("redirect:managePackages.htm");
     }
     
     
     @RequestMapping(value = "/editav.htm", method = RequestMethod.GET)
-    public String editAv(Model model , HttpSession session ){
-        
+    public String editAv(Model model , HttpSession session ){        
         AvailabilityWrapper avwrap = new AvailabilityWrapper();
         avwrap.setAv(foodItem.getAvailability());
         model.addAttribute("editav",avwrap);      
-        model.addAttribute( "user" , session.getAttribute( "user" ) != null ? session.getAttribute("user") : "{}" );
-             
+        model.addAttribute( "user" , session.getAttribute( "user" ) != null ? session.getAttribute("user") : "{}" );            
       return "editav";   }   
     
     
     @RequestMapping(value="editav" ,method=RequestMethod.POST)
-    public ModelAndView addAv(@ModelAttribute("editav") AvailabilityWrapper avwrap){
-      
-        foodItem.createAvailability(avwrap.getAv());
-        
+    public ModelAndView addAv(@ModelAttribute("editav") AvailabilityWrapper avwrap){    
+        foodItem.createAvailability(avwrap.getAv());      
         ApplicationContext ctx=new ClassPathXmlApplicationContext("../applicationContext.xml");
-        FoodDAO foodDAO=(FoodDAO)ctx.getBean("foodDAO");
-            
+        FoodDAO foodDAO=(FoodDAO)ctx.getBean("foodDAO");          
         foodDAO.deleteFoodQuery(foodItem);            
-        foodDAO.createFoodQuery(foodItem);
-        
+        foodDAO.createFoodQuery(foodItem);       
         foodItem=null;
-        
-      
-      return new ModelAndView("redirect:managePackages.htm");
+       return new ModelAndView("redirect:managePackages.htm");
     }   
     
     @RequestMapping(value="managePackages.htm",method=RequestMethod.GET )
-    public ModelAndView packageIndex( HttpSession session , @ModelAttribute("user") OnlineUser user)
+    public ModelAndView packageIndex( HttpSession session )
     {
+        OnlineUser user = (OnlineUser)session.getAttribute("user");
+        
         if(user.getIsAdmin()){
               return new ModelAndView( "managePackages" , "user" , 
                 session.getAttribute( "user" ) != null ? session.getAttribute("user" ) : "{}" );

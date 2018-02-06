@@ -72,6 +72,11 @@
                 <td><form:errors path="IsVeg" cssClass="error" /></td>
             </tr> 
             <tr> 
+             <tr> 
+                <td>Image URL :</td> 
+                <td><form:input path="Image" /></td> 
+                <td><form:errors path="Image" cssClass="error" /></td>
+            </tr> 
                 <td colspan="2">
                 <input type="submit" value="Add Availability"></td> 
             </tr> 
